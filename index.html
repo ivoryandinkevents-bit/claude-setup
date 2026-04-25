@@ -6,351 +6,649 @@
 <title>My Claude Setup — Calm Back with Gem</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lexend:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg: #efe9e4;            /* brand cream */
-    --surface: #fbf7f3;       /* warm card surface */
-    --ink: #2f2a27;           /* dark chocolate */
-    --ink-soft: #5a4f48;
-    --muted: #8a7e74;
-    --line: #e2d8cd;
-    --sage: #8faf9a;
-    --sage-deep: #6e9381;
-    --sage-soft: #e6ede7;
-    --chocolate: #2f2a27;
-    --gold: #c9a24d;
-    --terracotta: #c46a4a;
+    /* Brand palette — purple-led, magical, bold */
+    --lavender: #f3eaff;
+    --lilac: #e7d4ff;
+    --purple: #6b3fa0;
+    --purple-deep: #3d1d6b;
     --plum: #5a3e5b;
-    /* legacy aliases used throughout the file */
-    --green: var(--sage);
-    --green-deep: var(--chocolate);
-    --green-soft: var(--sage-soft);
-    --accent: var(--gold);
-    --success: var(--sage-deep);
-    --shadow: 0 1px 2px rgba(47, 42, 39, .04), 0 8px 24px rgba(47, 42, 39, .07);
-    --radius: 12px;
+    --pink: #ff6db5;
+    --pink-soft: #ffd9ec;
+    --gold: #d4a84a;
+    --gold-soft: #fdf2cc;
+    --teal: #5dc7c0;
+    --teal-soft: #d4f1ee;
+    --sage: #a8c8b3;
+    --cream: #fdfaff;
+
+    /* Functional */
+    --bg: #faf6ff;
+    --surface: #ffffff;
+    --ink: #2a1a3e;
+    --ink-soft: #5a4a73;
+    --muted: #8a7ba0;
+    --line: #e8dff5;
+    --shadow: 0 2px 6px rgba(61, 29, 107, .06), 0 12px 32px rgba(61, 29, 107, .08);
+    --shadow-pop: 0 4px 12px rgba(107, 63, 160, .15), 0 16px 40px rgba(107, 63, 160, .15);
+    --radius: 16px;
+    --radius-lg: 22px;
   }
+
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Lexend', system-ui, -apple-system, sans-serif;
     background: var(--bg);
+    background-image:
+      radial-gradient(circle at 10% 0%, var(--lilac) 0%, transparent 40%),
+      radial-gradient(circle at 90% 10%, var(--pink-soft) 0%, transparent 35%),
+      radial-gradient(circle at 50% 100%, var(--teal-soft) 0%, transparent 45%);
+    background-attachment: fixed;
     color: var(--ink);
-    line-height: 1.55;
+    line-height: 1.65;
+    font-size: 16px;
     -webkit-font-smoothing: antialiased;
+    letter-spacing: 0.01em;
   }
-  .wrap { max-width: 1100px; margin: 0 auto; padding: 32px 24px 80px; }
+
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 28px 20px 80px; }
+
+  /* HERO */
   header.hero {
-    margin-bottom: 28px;
+    text-align: center;
+    padding: 32px 20px 28px;
+    margin-bottom: 24px;
   }
   .logo {
     display: block;
-    height: 64px;
+    margin: 0 auto 18px;
+    height: 110px;
     width: auto;
-    margin-bottom: 18px;
+    max-width: 90%;
+    mix-blend-mode: multiply;
+    filter: drop-shadow(0 8px 24px rgba(107, 63, 160, .2));
   }
   @media (max-width: 640px) {
-    .logo { height: 52px; }
+    .logo { height: 88px; }
   }
-  .badge {
-    display: inline-block;
-    font-size: 11px;
-    letter-spacing: 1.4px;
-    text-transform: uppercase;
-    color: var(--green);
-    background: var(--green-soft);
-    padding: 6px 12px;
-    border-radius: 999px;
+  h1.hero-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(36px, 6vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--purple-deep);
+    margin: 8px 0 14px;
+  }
+  h1.hero-title em {
+    font-style: italic;
+    color: var(--pink);
     font-weight: 600;
   }
-  h1 {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(28px, 4vw, 42px);
-    font-weight: 500;
-    margin: 14px 0 8px;
-    color: var(--green-deep);
-    letter-spacing: -0.02em;
-  }
-  .subtitle {
+  .hero-sub {
+    font-size: 17px;
     color: var(--ink-soft);
-    font-size: 16px;
-    max-width: 600px;
+    max-width: 580px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  .hero-sparkles {
+    font-size: 22px;
+    margin-top: 10px;
+    letter-spacing: 8px;
   }
 
-  /* Tabs */
+  /* TABS */
   .tabs {
     display: flex;
     flex-wrap: wrap;
-    gap: 4px;
+    gap: 6px;
     background: var(--surface);
-    padding: 6px;
+    padding: 8px;
     border-radius: var(--radius);
-    margin: 28px 0 24px;
+    margin: 24px 0 22px;
     box-shadow: var(--shadow);
     border: 1px solid var(--line);
+    position: sticky;
+    top: 12px;
+    z-index: 50;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
   }
   .tab-btn {
     flex: 1;
-    min-width: 120px;
+    min-width: 110px;
     background: transparent;
     border: none;
-    padding: 12px 14px;
-    font-family: inherit;
+    padding: 14px 12px;
+    font-family: 'Outfit', 'Lexend', sans-serif;
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 700;
     color: var(--ink-soft);
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 10px;
     transition: all .2s ease;
-    letter-spacing: .3px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
   }
-  .tab-btn:hover { background: var(--green-soft); color: var(--green-deep); }
+  .tab-btn .ico { font-size: 22px; line-height: 1; }
+  .tab-btn:hover {
+    background: var(--lavender);
+    color: var(--purple-deep);
+    transform: translateY(-1px);
+  }
   .tab-btn.active {
-    background: var(--green-deep);
     color: #fff;
-    box-shadow: 0 2px 8px rgba(31, 53, 44, .25);
+    box-shadow: var(--shadow-pop);
+    transform: translateY(-1px);
   }
-  .tab-btn .ico { margin-right: 6px; }
+  /* Each tab gets its own personality colour */
+  .tab-btn[data-tab="profile"].active { background: linear-gradient(135deg, #d4a84a, #b88a2c); }
+  .tab-btn[data-tab="projects"].active { background: linear-gradient(135deg, #6b3fa0, #4a2a73); }
+  .tab-btn[data-tab="connectors"].active { background: linear-gradient(135deg, #5dc7c0, #3a9d97); }
+  .tab-btn[data-tab="skills"].active { background: linear-gradient(135deg, #ff6db5, #d94a8f); }
+  .tab-btn[data-tab="prompts"].active { background: linear-gradient(135deg, #b56cf2, #8a3dd1); }
+  .tab-btn[data-tab="checklist"].active { background: linear-gradient(135deg, #5a8a6f, #3e6650); }
 
-  .panel {
-    display: none;
-    animation: fade .35s ease;
-  }
+  /* PANELS */
+  .panel { display: none; animation: fade .35s ease; }
   .panel.active { display: block; }
   @keyframes fade {
-    from { opacity: 0; transform: translateY(6px); }
+    from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
+  /* CARDS */
   .card {
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 28px;
+    border-radius: var(--radius-lg);
+    padding: 32px;
     box-shadow: var(--shadow);
-    margin-bottom: 18px;
+    margin-bottom: 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: var(--accent-color, var(--purple));
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+  .card-eyebrow {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-color, var(--purple));
+    margin-bottom: 8px;
   }
   .card h2 {
     font-family: 'Fraunces', serif;
-    font-weight: 500;
-    font-size: 24px;
-    margin: 0 0 6px;
-    color: var(--green-deep);
-    letter-spacing: -0.01em;
+    font-weight: 600;
+    font-size: clamp(28px, 4vw, 36px);
+    line-height: 1.1;
+    margin: 0 0 12px;
+    color: var(--purple-deep);
+    letter-spacing: -0.015em;
   }
+  .card h2 em { font-style: italic; color: var(--pink); }
   .card .lead {
     color: var(--ink-soft);
     margin: 0 0 8px;
-    font-size: 15px;
+    font-size: 16px;
+    line-height: 1.6;
   }
-  .start-here {
-    background: #f7e8df;                          /* terracotta tint — warm callout */
-    border-left: 3px solid var(--terracotta);
-    padding: 12px 16px;
-    border-radius: 8px;
-    margin: 16px 0 24px;
-    font-size: 14px;
-    color: var(--ink);
-  }
-  .start-here strong { color: var(--terracotta); }
 
+  /* START HERE — chunky, impossible to miss */
+  .start-here {
+    background: linear-gradient(135deg, var(--lavender), var(--pink-soft));
+    border: 2px dashed var(--pink);
+    padding: 18px 22px;
+    border-radius: 14px;
+    margin: 22px 0 28px;
+    font-size: 15px;
+    color: var(--purple-deep);
+    line-height: 1.55;
+  }
+  .start-here .badge {
+    display: inline-block;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    background: var(--pink);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+
+  /* FORM ELEMENTS */
   label {
     display: block;
+    font-family: 'Outfit', sans-serif;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--muted);
-    margin: 18px 0 6px;
+    letter-spacing: 0.12em;
+    color: var(--purple);
+    margin: 22px 0 8px;
   }
   input[type="text"], textarea, select {
     width: 100%;
-    background: #fafbfa;
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 12px 14px;
-    font-family: inherit;
-    font-size: 14px;
+    background: #fcfaff;
+    border: 2px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-family: 'Lexend', sans-serif;
+    font-size: 15px;
     color: var(--ink);
-    transition: border-color .15s ease, background .15s ease;
+    transition: all .15s ease;
     resize: vertical;
+    line-height: 1.55;
   }
   input[type="text"]:focus, textarea:focus, select:focus {
     outline: none;
-    border-color: var(--green);
+    border-color: var(--purple);
     background: #fff;
+    box-shadow: 0 0 0 4px rgba(107, 63, 160, .12);
   }
-  textarea { min-height: 110px; line-height: 1.55; }
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 20px; }
+  textarea { min-height: 120px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 22px; }
   @media (max-width: 640px) { .grid-2 { grid-template-columns: 1fr; } }
 
-  /* Buttons */
+  /* BUTTONS */
   .btn {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    background: var(--green-deep);
+    gap: 8px;
+    background: linear-gradient(135deg, var(--purple), var(--purple-deep));
     color: #fff;
     border: none;
-    padding: 10px 16px;
-    border-radius: 8px;
-    font-family: inherit;
+    padding: 13px 22px;
+    border-radius: 12px;
+    font-family: 'Outfit', sans-serif;
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 700;
     cursor: pointer;
-    transition: all .15s ease;
-    letter-spacing: .3px;
+    transition: all .2s ease;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    box-shadow: 0 4px 14px rgba(107, 63, 160, .25);
   }
-  .btn:hover { background: var(--green); transform: translateY(-1px); }
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(107, 63, 160, .35);
+  }
   .btn.ghost {
     background: transparent;
-    color: var(--green-deep);
-    border: 1px solid var(--line);
+    color: var(--purple-deep);
+    border: 2px solid var(--purple);
+    box-shadow: none;
   }
-  .btn.ghost:hover { background: var(--green-soft); border-color: var(--green); }
-  .btn.tiny { padding: 6px 12px; font-size: 12px; }
-  .btn.success { background: var(--success); }
+  .btn.ghost:hover { background: var(--lavender); }
+  .btn.tiny { padding: 9px 14px; font-size: 11px; }
+  .btn.pink { background: linear-gradient(135deg, var(--pink), #d94a8f); box-shadow: 0 4px 14px rgba(255, 109, 181, .3); }
+  .btn.pink:hover { box-shadow: 0 8px 22px rgba(255, 109, 181, .4); }
+  .btn.gold { background: linear-gradient(135deg, var(--gold), #b88a2c); box-shadow: 0 4px 14px rgba(212, 168, 74, .3); }
 
   .copy-row {
     display: flex;
     justify-content: flex-end;
-    gap: 8px;
-    margin-top: 10px;
+    gap: 10px;
+    margin-top: 14px;
   }
 
-  /* Template blocks */
+  /* TEMPLATE BLOCKS */
   .template {
     border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 20px;
-    margin: 14px 0;
-    background: #fafbfa;
+    border-radius: 14px;
+    padding: 24px;
+    margin: 18px 0;
+    background: #fcfaff;
+    border-left: 5px solid var(--accent-color, var(--purple));
+    transition: box-shadow .2s ease;
   }
+  .template:hover { box-shadow: var(--shadow); }
   .template h3 {
-    margin: 0 0 4px;
-    font-size: 16px;
-    color: var(--green-deep);
+    margin: 0 0 6px;
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
     font-weight: 600;
+    color: var(--purple-deep);
+    letter-spacing: -0.01em;
   }
+  .template h3 .emoji { margin-right: 6px; font-size: 20px; }
   .template .desc {
-    font-size: 13px;
-    color: var(--muted);
-    margin: 0 0 12px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin: 0 0 14px;
+    line-height: 1.55;
   }
 
-  /* Connector list */
-  .connector-list { display: grid; gap: 10px; }
+  /* CONNECTORS */
+  .connector-list { display: grid; gap: 12px; }
   .connector {
     display: grid;
-    grid-template-columns: 28px 1fr auto;
-    gap: 14px;
-    padding: 14px 16px;
-    border: 1px solid var(--line);
-    border-radius: 10px;
+    grid-template-columns: 48px 1fr auto;
+    gap: 16px;
+    padding: 18px 20px;
+    border: 2px solid var(--line);
+    border-radius: 14px;
     align-items: center;
-    background: #fafbfa;
-    transition: border-color .15s ease;
+    background: #fcfaff;
+    transition: all .2s ease;
   }
-  .connector:hover { border-color: var(--green); }
-  .connector .icon { font-size: 22px; text-align: center; }
-  .connector .meta strong { display: block; color: var(--ink); font-size: 14px; }
-  .connector .meta small { color: var(--muted); font-size: 12px; }
-  .connector .meta .perm { display: inline-block; margin-top: 4px; font-size: 11px; padding: 2px 8px; background: var(--green-soft); color: var(--green-deep); border-radius: 999px; font-weight: 600; }
-  .connector input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--green-deep); cursor: pointer; }
+  .connector:hover {
+    border-color: var(--purple);
+    transform: translateX(2px);
+    box-shadow: var(--shadow);
+  }
+  .connector .icon {
+    font-size: 32px;
+    text-align: center;
+    line-height: 1;
+  }
+  .connector .meta strong {
+    display: block;
+    color: var(--ink);
+    font-size: 16px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .connector .meta small {
+    display: block;
+    color: var(--ink-soft);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .connector .meta .perm {
+    display: inline-block;
+    margin-top: 6px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    background: var(--lavender);
+    color: var(--purple-deep);
+    border-radius: 999px;
+  }
+  .connector input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    accent-color: var(--purple);
+    cursor: pointer;
+  }
 
-  /* Prompt cards */
-  .prompts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+  /* PROMPTS GRID */
+  .prompts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 16px;
+  }
   .prompt-card {
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 18px;
-    background: #fafbfa;
+    border: 2px solid var(--line);
+    border-radius: 14px;
+    padding: 22px;
+    background: #fff;
     display: flex;
     flex-direction: column;
+    transition: all .2s ease;
+    position: relative;
+    overflow: hidden;
   }
-  .prompt-card h3 { margin: 0 0 4px; font-size: 15px; color: var(--green-deep); }
-  .prompt-card .tag { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
-  .prompt-card .body { font-size: 13px; color: var(--ink-soft); margin: 10px 0 14px; flex: 1; line-height: 1.55; }
-  .prompt-card .actions { display: flex; justify-content: flex-end; }
+  .prompt-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--purple), var(--pink), var(--gold));
+    opacity: 0.7;
+  }
+  .prompt-card:hover {
+    border-color: var(--purple);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-pop);
+  }
+  .prompt-card .tag {
+    font-family: 'Outfit', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--pink);
+  }
+  .prompt-card h3 {
+    margin: 4px 0 10px;
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--purple-deep);
+    letter-spacing: -0.01em;
+  }
+  .prompt-card .body {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin: 0 0 16px;
+    flex: 1;
+    line-height: 1.6;
+  }
 
-  /* Checklist */
-  .checklist { display: grid; gap: 8px; }
+  /* CHECKLIST */
+  .checklist { display: grid; gap: 10px; }
   .check-item {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
-    padding: 14px 16px;
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    background: #fafbfa;
+    gap: 14px;
+    padding: 18px 20px;
+    border: 2px solid var(--line);
+    border-radius: 14px;
+    background: #fcfaff;
     cursor: pointer;
-    transition: all .15s ease;
+    transition: all .2s ease;
   }
-  .check-item:hover { border-color: var(--green); }
-  .check-item input { margin-top: 3px; width: 18px; height: 18px; accent-color: var(--green-deep); cursor: pointer; flex-shrink: 0; }
-  .check-item.done { background: var(--green-soft); border-color: var(--green); }
-  .check-item.done .label-text { text-decoration: line-through; color: var(--muted); }
+  .check-item:hover {
+    border-color: var(--purple);
+    transform: translateX(3px);
+  }
+  .check-item input[type="checkbox"] {
+    margin-top: 2px;
+    width: 24px;
+    height: 24px;
+    accent-color: var(--purple);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .check-item.done {
+    background: linear-gradient(135deg, var(--lavender), var(--pink-soft));
+    border-color: var(--purple);
+  }
+  .check-item.done .label-text {
+    text-decoration: line-through;
+    color: var(--muted);
+  }
   .check-item .meta { flex: 1; }
-  .check-item .label-text { font-weight: 500; font-size: 14px; color: var(--ink); }
-  .check-item .sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .check-item .label-text {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .check-item .sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+  .check-item .num {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--purple);
+    line-height: 1;
+    margin-right: 4px;
+    min-width: 28px;
+  }
+  .check-item.done .num { color: var(--purple-deep); }
 
+  /* PROGRESS */
+  .progress-card {
+    background: linear-gradient(135deg, var(--purple-deep), var(--purple));
+    color: #fff;
+    border-radius: 18px;
+    padding: 24px 28px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-pop);
+  }
+  .progress-card .pct {
+    font-family: 'Fraunces', serif;
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .progress-card .pct em {
+    font-style: italic;
+    font-size: 28px;
+    color: var(--pink-soft);
+    margin-left: 4px;
+  }
+  .progress-card .label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-top: 6px;
+  }
   .progress-bar {
-    height: 8px;
-    background: var(--line);
+    height: 12px;
+    background: rgba(255, 255, 255, 0.15);
     border-radius: 999px;
     overflow: hidden;
-    margin: 18px 0 6px;
+    margin: 16px 0 6px;
   }
   .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--green), var(--success));
-    transition: width .3s ease;
+    background: linear-gradient(90deg, var(--gold), var(--pink), var(--teal));
+    transition: width .5s ease;
     border-radius: 999px;
+    background-size: 200% 100%;
+    animation: shimmer 4s linear infinite;
   }
-  .progress-meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); }
+  @keyframes shimmer {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    opacity: 0.85;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .progress-celebrate {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 18px;
+    margin-top: 14px;
+    opacity: 0;
+    transition: opacity .4s ease;
+  }
+  .progress-celebrate.show { opacity: 1; }
 
+  /* TOAST */
   .toast {
     position: fixed;
-    bottom: 24px;
+    bottom: 28px;
     left: 50%;
     transform: translateX(-50%) translateY(20px);
-    background: var(--green-deep);
+    background: linear-gradient(135deg, var(--purple-deep), var(--purple));
     color: #fff;
-    padding: 10px 20px;
+    padding: 14px 24px;
     border-radius: 999px;
+    font-family: 'Outfit', sans-serif;
     font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
     opacity: 0;
-    transition: all .25s ease;
+    transition: all .3s ease;
     pointer-events: none;
     z-index: 100;
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-pop);
   }
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 
+  /* DIVIDER WITH SPARKLES */
+  .sparkle-divider {
+    text-align: center;
+    margin: 24px 0;
+    color: var(--pink);
+    font-size: 16px;
+    letter-spacing: 12px;
+  }
+
+  /* FOOTER */
   footer.foot {
     text-align: center;
-    margin-top: 40px;
-    padding-top: 24px;
-    border-top: 1px solid var(--line);
-    color: var(--muted);
-    font-size: 12px;
-  }
-  .signature { font-family: 'Fraunces', serif; font-style: italic; color: var(--ink-soft); font-size: 13px; }
-  .foot-cta {
-    margin-top: 18px;
-    padding: 14px 18px;
-    background: var(--sage-soft);
-    border-radius: 10px;
-    color: var(--ink);
+    margin-top: 50px;
+    padding-top: 28px;
+    border-top: 2px dashed var(--lilac);
+    color: var(--ink-soft);
     font-size: 13px;
-    display: inline-block;
   }
+  .signature {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--purple-deep);
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+  .foot-cta {
+    margin-top: 22px;
+    padding: 22px 26px;
+    background: linear-gradient(135deg, var(--lavender), var(--pink-soft));
+    border-radius: 16px;
+    color: var(--ink);
+    font-size: 14px;
+    display: inline-block;
+    border: 2px dashed var(--purple);
+  }
+  .foot-cta strong { display: block; font-family: 'Fraunces', serif; font-size: 18px; color: var(--purple-deep); margin-bottom: 6px; }
   .foot-cta a {
-    color: var(--terracotta);
-    font-weight: 600;
+    color: var(--pink);
+    font-weight: 700;
     text-decoration: none;
-    margin-left: 6px;
+    margin-left: 4px;
+    font-family: 'Outfit', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 13px;
   }
   .foot-cta a:hover { text-decoration: underline; }
 </style>
@@ -360,290 +658,336 @@
 
 <header class="hero">
   <img src="logo.png" alt="Calm Back with Gem" class="logo" />
-  <span class="badge">◆ Personal Command Center</span>
-  <h1>My Claude Setup</h1>
-  <p class="subtitle">A working command center for setting up Claude exactly the way I work — profile, projects, skills, connectors, prompts. Edit anything. Copy what you need. Tick things off as you go.</p>
+  <h1 class="hero-title">My Claude <em>setup</em></h1>
+  <p class="hero-sub">The bit no one tells you to do. Set Claude up properly once and it stops being a tab you forget about — it becomes the thing that actually moves work for you.</p>
+  <div class="hero-sparkles">✦ &nbsp; ✧ &nbsp; ✦</div>
 </header>
 
 <nav class="tabs" id="tabs">
-  <button class="tab-btn active" data-tab="profile"><span class="ico">◐</span>Profile</button>
-  <button class="tab-btn" data-tab="projects"><span class="ico">▤</span>Projects</button>
-  <button class="tab-btn" data-tab="connectors"><span class="ico">◇</span>Connectors</button>
-  <button class="tab-btn" data-tab="skills"><span class="ico">✦</span>Skills</button>
-  <button class="tab-btn" data-tab="prompts"><span class="ico">▸</span>Prompts</button>
-  <button class="tab-btn" data-tab="checklist"><span class="ico">✓</span>Checklist</button>
+  <button type="button" class="tab-btn active" data-tab="profile"><span class="ico">🪪</span>Profile</button>
+  <button type="button" class="tab-btn" data-tab="projects"><span class="ico">💼</span>Projects</button>
+  <button type="button" class="tab-btn" data-tab="connectors"><span class="ico">🔌</span>Connectors</button>
+  <button type="button" class="tab-btn" data-tab="skills"><span class="ico">✨</span>Skills</button>
+  <button type="button" class="tab-btn" data-tab="prompts"><span class="ico">⚡</span>Prompts</button>
+  <button type="button" class="tab-btn" data-tab="checklist"><span class="ico">✅</span>Checklist</button>
 </nav>
 
 <!-- PROFILE -->
 <section class="panel active" id="panel-profile">
-  <div class="card">
-    <h2>Custom Instructions — Your Profile</h2>
-    <p class="lead">This is the single most important setup step. Claude reads your profile on every conversation and tailors responses to *you*.</p>
-    <div class="start-here"><strong>Start here →</strong> Fill in the fields below, then click "Generate" to build a profile block. Paste it into Settings → Profile in Claude.</div>
+  <div class="card" style="--accent-color: var(--gold);">
+    <div class="card-eyebrow">Step 01 · The Foundation</div>
+    <h2>Tell Claude <em>who you are</em></h2>
+    <p class="lead">This is the single thing that changes how every conversation feels. Skip it and Claude treats you like everyone else. Do it and it actually starts sounding like a real assistant.</p>
+
+    <div class="start-here">
+      <span class="badge">Start here</span>
+      Fill these in honestly, then hit <strong>Generate</strong>. Paste the result into <strong>Settings → Profile</strong> in Claude. Takes 10 minutes. Worth more than any course you'll buy this year.
+    </div>
 
     <div class="grid-2">
       <div>
         <label>Your name</label>
-        <input type="text" id="p-name" placeholder="e.g. Gemma" />
+        <input type="text" id="p-name" placeholder="Gemma" />
       </div>
       <div>
         <label>Business or role</label>
-        <input type="text" id="p-role" placeholder="e.g. Founder of Calm Back with Gem" />
+        <input type="text" id="p-role" placeholder="Founder of Calm Back with Gem" />
       </div>
       <div>
         <label>Industry / niche</label>
-        <input type="text" id="p-industry" placeholder="e.g. Business strategy for neurodivergent founders" />
+        <input type="text" id="p-industry" placeholder="Business strategy for neurodivergent founders" />
       </div>
       <div>
-        <label>Location / timezone</label>
-        <input type="text" id="p-loc" placeholder="e.g. Brisbane, AEST" />
+        <label>Where you're based</label>
+        <input type="text" id="p-loc" placeholder="UK · GMT" />
       </div>
     </div>
 
-    <label>What do you mostly use Claude for?</label>
-    <textarea id="p-uses" placeholder="Writing client emails, drafting proposals, planning content, untangling ideas, building SOPs, etc."></textarea>
+    <label>What you mostly use Claude for</label>
+    <textarea id="p-uses" placeholder="Writing client emails, drafting proposals, planning content, untangling ideas at 11pm, building SOPs..."></textarea>
 
-    <label>Tools you use daily</label>
+    <label>Tools you actually use daily</label>
     <textarea id="p-tools" placeholder="Notion, Google Calendar, Gmail, Canva, WordPress, Slack..."></textarea>
 
-    <label>Preferred response style</label>
-    <textarea id="p-style" placeholder="e.g. Plain language, no fluff. Use lists when it helps. Push back if my idea is weak. Don't over-apologise."></textarea>
+    <label>How you want Claude to talk to you</label>
+    <textarea id="p-style" placeholder="Plain language, no fluff. Push back if my idea's weak. Short sentences. Don't apologise three times before answering."></textarea>
 
-    <label>Anything Claude should always know about you</label>
-    <textarea id="p-context" placeholder="e.g. Neurodivergent — I think in connections, not lists. I prefer being asked questions over being given options. Direct is kind."></textarea>
+    <label>What Claude should always know about you</label>
+    <textarea id="p-context" placeholder="ADHD/dyslexic — I think in connections, not lists. Direct is kind. Don't bury the answer in three paragraphs of context."></textarea>
 
     <div class="copy-row">
-      <button class="btn ghost" id="p-generate">Generate profile block</button>
+      <button type="button" class="btn ghost" id="p-generate">✦ Generate profile block</button>
     </div>
 
-    <label style="margin-top: 24px;">Generated profile (edit freely)</label>
-    <textarea id="p-output" style="min-height: 220px; font-family: 'Inter', monospace; font-size: 13px;"></textarea>
+    <label style="margin-top: 28px;">Your generated profile (edit this, it's yours)</label>
+    <textarea id="p-output" aria-label="Generated profile block" placeholder="Click 'Generate profile block' above and your formatted profile will appear here, ready to copy." style="min-height: 240px; font-size: 14px;"></textarea>
 
     <div class="copy-row">
-      <button class="btn" data-copy="#p-output">Copy to clipboard</button>
+      <button type="button" class="btn gold" data-copy="#p-output">📋 Copy to clipboard</button>
     </div>
   </div>
 </section>
 
 <!-- PROJECTS -->
 <section class="panel" id="panel-projects">
-  <div class="card">
-    <h2>Project Builder</h2>
-    <p class="lead">Projects let Claude carry context across conversations. Pick a starter, edit the system prompt, paste it into a new Claude project.</p>
-    <div class="start-here"><strong>Start here →</strong> Set up at least one project today. Content/Writing is the easiest to start — you'll feel the difference immediately.</div>
+  <div class="card" style="--accent-color: var(--purple);">
+    <div class="card-eyebrow">Step 02 · Containers for Your Brain</div>
+    <h2>Build <em>three projects</em></h2>
+    <p class="lead">Projects = separate rooms in Claude's brain. Different context, different rules, no leaking between them. Pick a starter, edit, paste into a new project in Claude. Done.</p>
 
-    <div class="template">
-      <h3>◇ Content & Writing</h3>
-      <p class="desc">For blog posts, social captions, email newsletters, anything where your voice matters.</p>
+    <div class="start-here">
+      <span class="badge">Start here</span>
+      Build the <strong>Content & Writing</strong> one first. You'll feel the difference immediately when you ask it to draft something.
+    </div>
+
+    <div class="sparkle-divider">✦ ✧ ✦</div>
+
+    <div class="template" style="--accent-color: var(--pink);">
+      <h3><span class="emoji">✍️</span>Content & Writing</h3>
+      <p class="desc">For blog posts, captions, newsletters — anywhere your voice matters.</p>
       <label>System prompt</label>
-      <textarea id="proj-content">You are my writing partner for content creation. My voice: warm, direct, a bit dry, never corporate. I write for neurodivergent business owners who are sick of generic advice.
+      <textarea id="proj-content">You are my writing partner. My voice: bold, direct, vulnerable, no-bullshit. I write for neurodivergent business owners who are tired of generic advice.
 
 Rules:
-- Match my voice samples in the knowledge base. Read them before drafting.
-- No "in today's fast-paced world" type openers. No "unlock", "leverage", "elevate".
-- Lead with the point. Add nuance after.
+- Read voice samples in the knowledge base BEFORE drafting anything.
+- Banned phrases: "unlock", "leverage", "elevate", "in today's", "game-changer", "deep dive", "harness", "journey".
+- Lead with the hook. Earn the reader's attention in line one.
+- Mix short punchy sentences with longer reflective ones. Never three long in a row.
 - If a draft sounds like ChatGPT wrote it, flag it and rewrite.
-- Ask before adding bullet lists — I overuse them.
-- Australian English spelling.</textarea>
-      <label>Knowledge base description (what to add)</label>
-      <textarea id="proj-content-kb" placeholder="3-5 best examples of my writing, brand guidelines, audience persona, list of words I never use..."></textarea>
-      <div class="copy-row"><button class="btn tiny" data-copy="#proj-content">Copy prompt</button></div>
+- End without summary closers. No "in conclusion".
+- Use British English.</textarea>
+      <label>What to add to this project's knowledge base</label>
+      <textarea id="proj-content-kb" placeholder="3-5 of your best writing samples, brand voice notes, audience persona, list of words you'd never say..."></textarea>
+      <div class="copy-row"><button type="button" class="btn tiny pink" data-copy="#proj-content">📋 Copy prompt</button></div>
     </div>
 
-    <div class="template">
-      <h3>◇ Client Work</h3>
-      <p class="desc">For client deliverables, proposals, briefs, and back-and-forth without leaking other clients' context.</p>
+    <div class="template" style="--accent-color: var(--purple);">
+      <h3><span class="emoji">💼</span>Client Work</h3>
+      <p class="desc">Per-client conversations without context leaking between them.</p>
       <label>System prompt</label>
-      <textarea id="proj-client">You are my client work assistant. Each conversation in this project is for ONE client at a time — I'll tell you who at the start.
+      <textarea id="proj-client">You are my client work assistant. Each conversation here is for ONE client at a time — I'll tell you which.
 
 Rules:
-- Always confirm which client we're working on before drafting anything client-facing.
-- Match the client's tone, not mine, when writing for them.
+- Confirm which client we're on before drafting anything client-facing.
+- Match the CLIENT's tone, not mine, when writing for them.
 - Output in clean, paste-ready format unless I ask for a draft.
-- Track scope carefully. If a request looks like scope creep, name it.
-- Default to Australian English unless the client is elsewhere.
-- Never invent project details — ask if you're unsure.</textarea>
-      <label>Knowledge base description (what to add)</label>
+- Track scope. If something looks like scope creep, name it.
+- Default to British English unless the client is elsewhere.
+- Never invent project details. Ask if you're unsure.</textarea>
+      <label>What to add to this project's knowledge base</label>
       <textarea id="proj-client-kb" placeholder="Client briefs, contracts, voice samples per client, deliverable templates, project scopes..."></textarea>
-      <div class="copy-row"><button class="btn tiny" data-copy="#proj-client">Copy prompt</button></div>
+      <div class="copy-row"><button type="button" class="btn tiny" data-copy="#proj-client">📋 Copy prompt</button></div>
     </div>
 
-    <div class="template">
-      <h3>◇ Admin & Ops</h3>
-      <p class="desc">For the back-office stuff: SOPs, calendar wrangling, inbox triage, meeting notes, follow-ups.</p>
+    <div class="template" style="--accent-color: var(--gold);">
+      <h3><span class="emoji">⚙️</span>Admin & Ops</h3>
+      <p class="desc">SOPs, calendar wrangling, inbox triage, meeting notes, follow-ups.</p>
       <label>System prompt</label>
-      <textarea id="proj-admin">You are my operations brain. You help me turn messy reality into clean systems.
+      <textarea id="proj-admin">You are my operations brain. Help me turn messy reality into clean systems.
 
 Rules:
 - When I describe a process, output it as an SOP I can drop into Notion: numbered steps, decision points called out, tools named.
-- When I dump a meeting or brain into you, return: (1) decisions made, (2) actions with owners, (3) open questions, (4) things to think about later.
+- When I dump a meeting or brain into you, return: (1) decisions, (2) actions with owners, (3) open questions, (4) things to think about later.
 - Be ruthless about removing fluff.
 - If I'm overcomplicating something, say so.
 - Default to checklist format for anything I'll do more than twice.</textarea>
-      <label>Knowledge base description (what to add)</label>
+      <label>What to add to this project's knowledge base</label>
       <textarea id="proj-admin-kb" placeholder="Existing SOP examples, tools list, recurring meeting structures, weekly review template..."></textarea>
-      <div class="copy-row"><button class="btn tiny" data-copy="#proj-admin">Copy prompt</button></div>
+      <div class="copy-row"><button type="button" class="btn tiny gold" data-copy="#proj-admin">📋 Copy prompt</button></div>
     </div>
   </div>
 </section>
 
 <!-- CONNECTORS -->
 <section class="panel" id="panel-connectors">
-  <div class="card">
-    <h2>Connectors — Apps to Connect</h2>
-    <p class="lead">Connectors let Claude actually do things in your tools. Turn them on one at a time so you understand what you're granting.</p>
-    <div class="start-here"><strong>Start here →</strong> Google Calendar + Gmail first. They unlock the most useful daily wins (calendar audits, inbox triage, follow-ups).</div>
+  <div class="card" style="--accent-color: var(--teal);">
+    <div class="card-eyebrow">Step 03 · Let Claude Touch Your World</div>
+    <h2>Connect your <em>actual tools</em></h2>
+    <p class="lead">Connectors = Claude can read and act in your apps. This is where it stops being a chat window and starts being useful. Turn them on one at a time so you understand what you're letting in.</p>
 
-    <div class="connector-list" id="connectors">
-      <!-- populated by JS -->
+    <div class="start-here">
+      <span class="badge">Start here</span>
+      <strong>Calendar + Gmail</strong> first. They unlock the daily wins you'll feel within 24 hours — calendar audits, inbox triage, follow-ups that don't feel like work.
     </div>
+
+    <div class="sparkle-divider">✦ ✧ ✦</div>
+
+    <div class="connector-list" id="connectors"></div>
   </div>
 </section>
 
 <!-- SKILLS -->
 <section class="panel" id="panel-skills">
-  <div class="card">
-    <h2>Skills Planner</h2>
-    <p class="lead">Skills are reusable instructions Claude triggers automatically when you mention a topic. Like having pre-trained shortcuts for your most-repeated work.</p>
-    <div class="start-here"><strong>Start here →</strong> Build one skill this week. Writing Voice is the highest-leverage place to begin.</div>
+  <div class="card" style="--accent-color: var(--pink);">
+    <div class="card-eyebrow">Step 04 · Your Personal Shortcuts</div>
+    <h2>Build your <em>skills library</em></h2>
+    <p class="lead">Skills = pre-trained instructions Claude triggers automatically when you mention a topic. Like having a shortcut for the things you do over and over. The leverage is wild.</p>
 
-    <div class="template">
-      <h3>✦ Writing Voice</h3>
-      <p class="desc">Triggers when you ask Claude to draft, write, edit, or rewrite anything for publication.</p>
+    <div class="start-here">
+      <span class="badge">Start here</span>
+      <strong>Writing Voice</strong> is the highest leverage one. Build it this week. Edit the banned-phrases list to match the words YOU would never say.
+    </div>
+
+    <div class="sparkle-divider">✦ ✧ ✦</div>
+
+    <div class="template" style="--accent-color: var(--pink);">
+      <h3><span class="emoji">✨</span>Writing Voice</h3>
+      <p class="desc">Triggers when you're drafting, editing, or rewriting anything you'll publish.</p>
       <label>Trigger description</label>
       <input type="text" id="skill1-trig" value="Use when drafting, editing, or rewriting any content I'll publish — blog, email, social, web copy." />
       <label>Skill instructions</label>
-      <textarea id="skill1-body" style="min-height: 180px;">When this skill is triggered:
+      <textarea id="skill1-body" style="min-height: 200px;">When this skill is triggered:
 
 1. Read the voice samples in the project knowledge base before producing anything.
-2. Draft in Gemma's voice: warm, direct, dry humour, no corporate filler.
-3. Banned phrases: "unlock", "leverage", "elevate", "in today's", "game-changer", "deep dive", "harness".
-4. Sentence rhythm: mix short and long. Never three long sentences in a row.
-5. End drafts without summary closers. No "in conclusion".
-6. After drafting, list 3 specific things you'd change if you had another pass — let me decide.
-7. Use Australian English.</textarea>
-      <div class="copy-row"><button class="btn tiny" data-copy="#skill1-body">Copy skill</button></div>
+2. Draft in Gemma's voice: bold, direct, vulnerable, no-bullshit.
+3. Banned phrases: "unlock", "leverage", "elevate", "in today's", "game-changer", "deep dive", "harness", "journey".
+4. Hook in line one. Earn attention. No throat-clearing intros.
+5. Mix short and long sentences. Never three long in a row.
+6. End drafts without summary closers. No "in conclusion".
+7. After drafting, list 3 specific things you'd change with another pass — let me decide.
+8. Use British English.</textarea>
+      <div class="copy-row"><button type="button" class="btn tiny pink" data-copy="#skill1-body">📋 Copy skill</button></div>
     </div>
 
-    <div class="template">
-      <h3>✦ Content Repurposer</h3>
-      <p class="desc">Triggers when you give Claude a long piece and ask for it broken into formats.</p>
+    <div class="template" style="--accent-color: var(--purple);">
+      <h3><span class="emoji">🔄</span>Content Repurposer</h3>
+      <p class="desc">Triggers when you've made a long thing and want it broken into formats.</p>
       <label>Trigger description</label>
-      <input type="text" id="skill2-trig" value="Use when I share a long-form piece (post, video transcript, podcast) and want it turned into multiple shorter assets." />
+      <input type="text" id="skill2-trig" value="Use when I share a long-form piece (post, video, podcast) and want it turned into multiple shorter assets." />
       <label>Skill instructions</label>
-      <textarea id="skill2-body" style="min-height: 180px;">When this skill is triggered:
+      <textarea id="skill2-body" style="min-height: 200px;">When this skill is triggered:
 
-1. Identify the 3 strongest ideas in the source material — not the most quotable, the most useful.
+1. Identify the 3 strongest IDEAS in the source — not the most quotable, the most useful.
 2. For each idea, produce:
-   - One LinkedIn post (hook + body + soft CTA, max 200 words)
-   - One Instagram caption (punchier, breaks for breath, no hashtags)
-   - One email subject line + 2-line preview
+   - 1 LinkedIn post (hook + body + soft CTA, max 200 words)
+   - 1 Instagram caption (punchier, breaks for breath, no hashtags)
+   - 1 email subject + 2-line preview
 3. Pull a "quote card" line from each — punchy, standalone.
-4. Flag anything that's too thin to repurpose. Don't pad.
-5. Maintain Gemma's voice rules from the Writing Voice skill.</textarea>
-      <div class="copy-row"><button class="btn tiny" data-copy="#skill2-body">Copy skill</button></div>
+4. Flag anything too thin to repurpose. Don't pad.
+5. Maintain Writing Voice rules.</textarea>
+      <div class="copy-row"><button type="button" class="btn tiny" data-copy="#skill2-body">📋 Copy skill</button></div>
     </div>
 
-    <div class="template">
-      <h3>✦ Client Email Drafter</h3>
+    <div class="template" style="--accent-color: var(--gold);">
+      <h3><span class="emoji">📧</span>Client Email Drafter</h3>
       <p class="desc">Triggers when you need to write or reply to a client email.</p>
       <label>Trigger description</label>
       <input type="text" id="skill3-trig" value="Use when drafting or replying to a client email — internal team emails are different." />
       <label>Skill instructions</label>
-      <textarea id="skill3-body" style="min-height: 180px;">When this skill is triggered:
+      <textarea id="skill3-body" style="min-height: 200px;">When this skill is triggered:
 
-1. Ask which client (if not stated) and what outcome I want from the email.
+1. Ask which client (if not stated) and what outcome I want.
 2. Open with one warm but specific line — not "hope you're well".
-3. State the point in the second sentence at latest.
-4. Use short paragraphs. White space is doing work.
+3. State the point by sentence two at the latest.
+4. Short paragraphs. White space is doing work.
 5. End with a clear next action — not "let me know your thoughts".
-6. If I'm saying no or pushing back, draft it kind but firm. No over-apologising.
+6. If I'm saying no, draft it kind but firm. No over-apologising.
 7. Sign off with "Gem" unless I say otherwise.</textarea>
-      <div class="copy-row"><button class="btn tiny" data-copy="#skill3-body">Copy skill</button></div>
+      <div class="copy-row"><button type="button" class="btn tiny gold" data-copy="#skill3-body">📋 Copy skill</button></div>
     </div>
   </div>
 </section>
 
 <!-- PROMPTS -->
 <section class="panel" id="panel-prompts">
-  <div class="card">
-    <h2>Starter Prompts</h2>
-    <p class="lead">Ready to run. Copy, paste, edit the bits in [brackets].</p>
-    <div class="start-here"><strong>Start here →</strong> The "Brain dump to plan" prompt is the one to try first. It's the difference between staring at a list and actually moving.</div>
+  <div class="card" style="--accent-color: #b56cf2;">
+    <div class="card-eyebrow">Step 05 · Copy & Run</div>
+    <h2>Starter <em>prompts</em></h2>
+    <p class="lead">Six ready-to-go prompts. Copy, paste, edit the bits in [brackets]. No setup needed.</p>
 
-    <div class="prompts-grid" id="prompts">
-      <!-- populated by JS -->
+    <div class="start-here">
+      <span class="badge">Start here</span>
+      <strong>Brain Dump to Plan</strong>. Try it once. It's the difference between staring at a list and actually moving.
     </div>
+
+    <div class="sparkle-divider">✦ ✧ ✦</div>
+
+    <div class="prompts-grid" id="prompts"></div>
   </div>
 </section>
 
 <!-- CHECKLIST -->
 <section class="panel" id="panel-checklist">
-  <div class="card">
-    <h2>Setup Progress</h2>
-    <p class="lead">A simple ladder. Don't try to do it all in one sitting — one section per session is plenty.</p>
-
+  <div class="progress-card">
+    <div class="pct"><span id="progress-pct">0</span><em>%</em></div>
+    <div class="label" id="progress-count">0 of 0 done · just getting started</div>
     <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width: 0%;"></div></div>
     <div class="progress-meta">
-      <span id="progress-count">0 of 0 done</span>
-      <span id="progress-pct">0%</span>
+      <span>One per session is plenty</span>
+      <span>You can come back anytime</span>
     </div>
+    <div class="progress-celebrate" id="progress-celebrate">✨ You did it. Look at you go.</div>
+  </div>
 
-    <div class="checklist" id="checklist" style="margin-top: 18px;">
-      <!-- populated by JS -->
-    </div>
+  <div class="card" style="--accent-color: var(--sage);">
+    <div class="card-eyebrow">Step 06 · The Ladder</div>
+    <h2>Tick things off as you <em>actually do them</em></h2>
+    <p class="lead">Don't try to do this all in one sitting. One section per session. Save state lives in your browser — close the tab, come back tomorrow.</p>
+
+    <div class="checklist" id="checklist" style="margin-top: 22px;"></div>
   </div>
 </section>
 
 <footer class="foot">
-  <div class="signature">Calm Back with Gem · calm, grounded, strategic</div>
-  <div style="margin-top: 6px;">Your inputs save automatically to this browser. Nothing leaves your device.</div>
+  <div class="signature">Calm Back with Gem · bold, grounded, unapologetic</div>
+  <div>Your inputs save automatically to this browser. Nothing leaves your device.</div>
   <div class="foot-cta">
-    Want help setting Claude up properly for your business?
-    <a href="https://calendar.notion.so/meet/gemmahurlstone/call" target="_blank" rel="noopener">Book a free Discovery Call →</a>
+    <strong>Want help setting Claude up properly for your business?</strong>
+    Free 30-min Discovery Call — no pitch, just clarity.
+    <a href="https://calendar.notion.so/meet/gemmahurlstone/call" target="_blank" rel="noopener">Book it →</a>
   </div>
 </footer>
 
 </div>
 
-<div class="toast" id="toast">Copied</div>
+<div class="toast" id="toast">Copied ✨</div>
 
 <script>
-const STORAGE_KEY = 'claude_personal_setup_v1';
+const STORAGE_KEY = 'claude_personal_setup_v2';
 
 // ---------- Data ----------
 const connectors = [
-  { id: 'gcal', icon: '◷', name: 'Google Calendar', perm: 'Read + write', desc: 'Audit your week, suggest focus blocks, draft meeting prep.' },
-  { id: 'gmail', icon: '✉', name: 'Gmail', perm: 'Read + draft', desc: 'Triage inbox, draft replies in your voice, surface what actually needs you.' },
-  { id: 'gdrive', icon: '◊', name: 'Google Drive', perm: 'Read only', desc: 'Pull context from briefs, contracts, voice samples without uploading each time.' },
-  { id: 'slack', icon: '◑', name: 'Slack', perm: 'Read + post', desc: 'Summarise channels, draft updates, reduce notification anxiety.' },
-  { id: 'notion', icon: '▣', name: 'Notion', perm: 'Read + write', desc: 'Keep SOPs, content plans, and client notes in sync with your work.' },
-  { id: 'canva', icon: '✦', name: 'Canva', perm: 'Read', desc: 'Reference brand assets and existing designs when drafting copy.' },
+  { id: 'gcal', icon: '📅', name: 'Google Calendar', perm: 'Read + write', desc: 'Audit your week, suggest focus blocks, draft meeting prep before you walk in.' },
+  { id: 'gmail', icon: '✉️', name: 'Gmail', perm: 'Read + draft', desc: 'Triage inbox, draft replies in your voice, surface what actually needs you.' },
+  { id: 'gdrive', icon: '📁', name: 'Google Drive', perm: 'Read only', desc: 'Pull context from briefs, contracts, voice samples without uploading every time.' },
+  { id: 'slack', icon: '💬', name: 'Slack', perm: 'Read + post', desc: 'Summarise channels, draft updates, kill notification anxiety.' },
+  { id: 'notion', icon: '📝', name: 'Notion', perm: 'Read + write', desc: 'Keep SOPs, content plans, and client notes in sync with your work.' },
+  { id: 'canva', icon: '🎨', name: 'Canva', perm: 'Read', desc: 'Reference brand assets and existing designs when drafting copy.' },
 ];
 
 const prompts = [
   { tag: 'Voice', title: 'Writing style trainer', body: 'Here are 3 samples of my writing: [paste 3 pieces].\n\nAnalyse them. Tell me: (1) the 5 words/phrases I use most, (2) my sentence rhythm patterns, (3) what makes a sentence sound like *me* vs generic, (4) 3 quirks I should keep, (5) anything I overuse that I should watch.' },
   { tag: 'Calendar', title: 'Calendar audit', body: 'Look at my calendar for [next 7 days]. Tell me: (1) where I have less than 90 minutes of focus time in a row, (2) any meeting that has no clear purpose, (3) where I\'ve double-booked attention (back-to-back-to-back), (4) one realistic change to suggest. Be honest, not polite.' },
-  { tag: 'Plan', title: 'Brain dump to plan', body: 'I\'m going to dump everything in my head. Don\'t solve anything yet — just listen.\n\n[Dump everything here.]\n\nNow: sort it into (1) actually urgent, (2) feels urgent but isn\'t, (3) someone else\'s problem, (4) future-me\'s problem. Then give me ONE thing to do next. Just one.' },
-  { tag: 'Ops', title: 'SOPs from process', body: 'I\'m going to describe how I do [task]. Turn it into an SOP I can hand to someone else.\n\n[Describe the process out loud — messy is fine.]\n\nFormat: numbered steps, decision points called out, tools named, common mistakes flagged. Don\'t add fluff. If a step is unclear, ask me.' },
+  { tag: 'Plan', title: 'Brain dump → plan', body: 'I\'m going to dump everything in my head. Don\'t solve anything yet — just listen.\n\n[Dump everything here.]\n\nNow: sort it into (1) actually urgent, (2) feels urgent but isn\'t, (3) someone else\'s problem, (4) future-me\'s problem. Then give me ONE thing to do next. Just one.' },
+  { tag: 'Ops', title: 'SOP from process', body: 'I\'m going to describe how I do [task]. Turn it into an SOP I can hand to someone else.\n\n[Describe the process — messy is fine.]\n\nFormat: numbered steps, decision points called out, tools named, common mistakes flagged. Don\'t add fluff. If a step is unclear, ask me.' },
   { tag: 'Content', title: 'Content repurposer', body: 'Here\'s a long piece I made: [paste].\n\nPull the 3 strongest ideas. For each, give me:\n- 1 LinkedIn post (hook + body + soft CTA, max 200 words)\n- 1 Instagram caption (punchier, no hashtags)\n- 1 email subject + 2-line preview\n- 1 quote-card line\n\nMatch my voice from the project knowledge base.' },
   { tag: 'Review', title: 'Weekly review', body: 'Help me run my weekly review. Ask me one question at a time, wait for my answer, then ask the next.\n\nQuestions to cover: what got done, what didn\'t and why, what I learned, what I\'m carrying into next week, what I\'m going to drop.\n\nAt the end, give me a 5-bullet summary I can paste into Notion.' },
 ];
 
 const checklistItems = [
-  { id: 'c1', label: 'Fill in my profile and paste into Settings', sub: 'PROFILE tab — the highest-leverage 10 minutes you\'ll spend.' },
-  { id: 'c2', label: 'Set up the Content & Writing project', sub: 'PROJECTS tab — copy the system prompt, create the project, drop in voice samples.' },
-  { id: 'c3', label: 'Set up the Client Work project', sub: 'PROJECTS tab — separate from personal work to keep contexts clean.' },
-  { id: 'c4', label: 'Set up the Admin & Ops project', sub: 'PROJECTS tab — for SOPs, calendar, inbox.' },
-  { id: 'c5', label: 'Connect Google Calendar', sub: 'CONNECTORS tab — first connector to turn on.' },
-  { id: 'c6', label: 'Connect Gmail', sub: 'CONNECTORS tab — biggest daily time saver.' },
-  { id: 'c7', label: 'Connect Google Drive', sub: 'CONNECTORS tab — read-only is enough to start.' },
-  { id: 'c8', label: 'Build the Writing Voice skill', sub: 'SKILLS tab — copy the template, edit the banned-phrases list to match you.' },
-  { id: 'c9', label: 'Build the Client Email Drafter skill', sub: 'SKILLS tab — saves 10+ minutes every email.' },
-  { id: 'c10', label: 'Run the Brain Dump to Plan prompt', sub: 'PROMPTS tab — the fastest way to feel the difference.' },
-  { id: 'c11', label: 'Run a calendar audit this week', sub: 'PROMPTS tab — surfaces things you stop seeing because you see them every day.' },
-  { id: 'c12', label: 'Decide one repeating process to turn into a skill next', sub: 'Whatever you do most days that drains energy — that\'s the next skill.' },
+  { id: 'c1', label: 'Fill in your profile and paste it into Settings', sub: 'Profile tab. Highest-leverage 10 minutes you\'ll spend this week.' },
+  { id: 'c2', label: 'Set up the Content & Writing project', sub: 'Projects tab. Copy the system prompt, create the project in Claude, drop in voice samples.' },
+  { id: 'c3', label: 'Set up the Client Work project', sub: 'Projects tab. Separate from personal so contexts stay clean.' },
+  { id: 'c4', label: 'Set up the Admin & Ops project', sub: 'Projects tab. For SOPs, calendar, inbox stuff.' },
+  { id: 'c5', label: 'Connect Google Calendar', sub: 'Connectors tab. First connector to turn on.' },
+  { id: 'c6', label: 'Connect Gmail', sub: 'Connectors tab. The biggest daily win.' },
+  { id: 'c7', label: 'Connect Google Drive', sub: 'Connectors tab. Read-only is enough to start.' },
+  { id: 'c8', label: 'Build the Writing Voice skill', sub: 'Skills tab. Edit the banned-phrases list to be YOUR list.' },
+  { id: 'c9', label: 'Build the Client Email Drafter skill', sub: 'Skills tab. Saves 10+ minutes every email.' },
+  { id: 'c10', label: 'Run the Brain Dump → Plan prompt', sub: 'Prompts tab. The fastest way to feel the difference.' },
+  { id: 'c11', label: 'Run a calendar audit this week', sub: 'Prompts tab. Surfaces the things you stop seeing because you see them every day.' },
+  { id: 'c12', label: 'Pick one repeating task to turn into the next skill', sub: 'Whatever drains the most energy = the next skill to build.' },
 ];
+
+const milestones = {
+  0: 'just getting started',
+  10: 'on the move',
+  25: 'finding rhythm',
+  50: 'halfway — really',
+  75: 'so close',
+  90: 'final stretch',
+  100: 'done. proud of you.'
+};
 
 // ---------- State ----------
 let state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
@@ -658,27 +1002,27 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
     state.activeTab = btn.dataset.tab;
     save();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 });
 
 // ---------- Toast ----------
 const toast = document.getElementById('toast');
 function showToast(msg) {
-  toast.textContent = msg || 'Copied';
+  toast.textContent = msg || 'Copied ✨';
   toast.classList.add('show');
   clearTimeout(showToast._t);
-  showToast._t = setTimeout(() => toast.classList.remove('show'), 1600);
+  showToast._t = setTimeout(() => toast.classList.remove('show'), 1800);
 }
 
 // ---------- Copy ----------
 document.addEventListener('click', e => {
   const t = e.target.closest('[data-copy]');
   if (!t) return;
-  const sel = t.getAttribute('data-copy');
-  const el = document.querySelector(sel);
+  const el = document.querySelector(t.getAttribute('data-copy'));
   if (!el) return;
   const text = el.value !== undefined ? el.value : el.textContent;
-  navigator.clipboard.writeText(text).then(() => showToast('Copied to clipboard'));
+  navigator.clipboard.writeText(text).then(() => showToast('Copied ✨'));
 });
 
 // ---------- Profile ----------
@@ -705,10 +1049,11 @@ Things to always keep in mind about me: ${v('p-context') || '[context]'}`.trim()
   out.value = block;
   state['p-output'] = block;
   save();
-  showToast('Profile generated below');
+  showToast('Profile generated ✨');
+  out.scrollIntoView({ behavior: 'smooth', block: 'center' });
 });
 
-// ---------- Projects (just persist edits) ----------
+// ---------- Projects (persist edits) ----------
 ['proj-content', 'proj-content-kb', 'proj-client', 'proj-client-kb', 'proj-admin', 'proj-admin-kb'].forEach(id => {
   const el = document.getElementById(id);
   if (state[id]) el.value = state[id];
@@ -735,7 +1080,7 @@ connectors.forEach(c => {
       <small>${c.desc}</small>
       <span class="perm">${c.perm}</span>
     </div>
-    <input type="checkbox" data-conn="${c.id}" ${state.connectors[c.id] ? 'checked' : ''} />
+    <input type="checkbox" data-conn="${c.id}" ${state.connectors[c.id] ? 'checked' : ''} aria-label="${c.name}" />
   `;
   connectorsEl.appendChild(div);
 });
@@ -749,14 +1094,15 @@ connectorsEl.addEventListener('change', e => {
 // ---------- Prompts ----------
 const promptsEl = document.getElementById('prompts');
 prompts.forEach((p, i) => {
-  const id = 'prompt-' + i;
   const card = document.createElement('div');
   card.className = 'prompt-card';
   card.innerHTML = `
     <span class="tag">${p.tag}</span>
     <h3>${p.title}</h3>
-    <div class="body" id="${id}">${p.body.replace(/\n/g, '<br>')}</div>
-    <div class="actions"><button class="btn tiny" data-copy-text="${i}">Copy prompt</button></div>
+    <div class="body">${p.body.replace(/\n/g, '<br>')}</div>
+    <div style="display:flex; justify-content:flex-end;">
+      <button type="button" class="btn tiny pink" data-copy-text="${i}">📋 Copy prompt</button>
+    </div>
   `;
   promptsEl.appendChild(card);
 });
@@ -764,22 +1110,28 @@ promptsEl.addEventListener('click', e => {
   const t = e.target.closest('[data-copy-text]');
   if (!t) return;
   const i = +t.dataset.copyText;
-  navigator.clipboard.writeText(prompts[i].body).then(() => showToast('Prompt copied'));
+  navigator.clipboard.writeText(prompts[i].body).then(() => showToast('Prompt copied ✨'));
 });
 
 // ---------- Checklist ----------
 const checkEl = document.getElementById('checklist');
 state.checks = state.checks || {};
+function getMilestone(pct) {
+  const keys = Object.keys(milestones).map(Number).sort((a, b) => b - a);
+  for (const k of keys) { if (pct >= k) return milestones[k]; }
+  return milestones[0];
+}
 function renderChecks() {
   checkEl.innerHTML = '';
   let done = 0;
-  checklistItems.forEach(it => {
+  checklistItems.forEach((it, idx) => {
     const checked = !!state.checks[it.id];
     if (checked) done++;
     const div = document.createElement('label');
     div.className = 'check-item' + (checked ? ' done' : '');
     div.innerHTML = `
       <input type="checkbox" data-check="${it.id}" ${checked ? 'checked' : ''} />
+      <span class="num">${String(idx + 1).padStart(2, '0')}</span>
       <div class="meta">
         <div class="label-text">${it.label}</div>
         <div class="sub">${it.sub}</div>
@@ -789,8 +1141,9 @@ function renderChecks() {
   });
   const pct = Math.round((done / checklistItems.length) * 100);
   document.getElementById('progress-fill').style.width = pct + '%';
-  document.getElementById('progress-count').textContent = `${done} of ${checklistItems.length} done`;
-  document.getElementById('progress-pct').textContent = pct + '%';
+  document.getElementById('progress-count').textContent = `${done} of ${checklistItems.length} done · ${getMilestone(pct)}`;
+  document.getElementById('progress-pct').textContent = pct;
+  document.getElementById('progress-celebrate').classList.toggle('show', pct === 100);
 }
 checkEl.addEventListener('change', e => {
   if (e.target.matches('input[type="checkbox"]')) {
