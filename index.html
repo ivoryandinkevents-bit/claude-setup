@@ -151,6 +151,7 @@
     transform: translateY(-1px);
   }
   /* Each tab gets its own personality colour */
+  .tab-btn[data-tab="start"].active { background: linear-gradient(135deg, #ff6db5, #b56cf2, #5dc7c0); }
   .tab-btn[data-tab="profile"].active { background: linear-gradient(135deg, #d4a84a, #b88a2c); }
   .tab-btn[data-tab="projects"].active { background: linear-gradient(135deg, #6b3fa0, #4a2a73); }
   .tab-btn[data-tab="connectors"].active { background: linear-gradient(135deg, #5dc7c0, #3a9d97); }
@@ -604,6 +605,96 @@
     transform: translateX(-50%) translateY(0);
   }
 
+  /* STEP TILES (Start Here tab) */
+  .step-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+    margin: 18px 0 8px;
+  }
+  .step-tile {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    border: 2px solid var(--line);
+    border-left: 5px solid var(--accent-color, var(--purple));
+    border-radius: 12px;
+    background: #fcfaff;
+    transition: all .2s ease;
+  }
+  .step-tile:hover {
+    border-color: var(--accent-color, var(--purple));
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
+  .step-num {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent-color, var(--purple));
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .step-meta { display: flex; flex-direction: column; gap: 2px; }
+  .step-meta strong {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--ink);
+  }
+  .step-meta span {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  /* INFO BLOCKS (ChatGPT migration etc.) */
+  .info-block {
+    background: linear-gradient(135deg, var(--lavender), #fff);
+    border: 1px solid var(--lilac);
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin: 20px 0;
+  }
+  .info-block.warm {
+    background: linear-gradient(135deg, var(--pink-soft), #fff);
+    border-color: var(--pink);
+  }
+  .info-block h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--purple-deep);
+    margin: 0 0 10px;
+  }
+  .info-block p {
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0 0 12px;
+  }
+  .info-block p.aside {
+    background: rgba(255, 255, 255, 0.6);
+    border-left: 3px solid var(--purple);
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    margin-top: 12px;
+  }
+  .how-list {
+    margin: 10px 0 14px;
+    padding-left: 22px;
+    color: var(--ink);
+  }
+  .how-list li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+    font-size: 15px;
+  }
+  .how-list li strong { color: var(--purple-deep); }
+  .how-list em { color: var(--pink); font-style: normal; font-weight: 600; }
+
   /* DIVIDER WITH SPARKLES */
   .sparkle-divider {
     text-align: center;
@@ -658,13 +749,14 @@
 
 <header class="hero">
   <img src="logo.png" alt="Calm Back with Gem" class="logo" />
-  <h1 class="hero-title">My Claude <em>setup</em></h1>
-  <p class="hero-sub">The bit no one tells you to do. Set Claude up properly once and it stops being a tab you forget about — it becomes the thing that actually moves work for you.</p>
+  <h1 class="hero-title">The Claude <em>setup guide</em></h1>
+  <p class="hero-sub">Everything you need to set Claude up properly — even if you've never used it before. Built for business owners who don't want to read a 40-page manual. Pinky promise it's painless.</p>
   <div class="hero-sparkles">✦ &nbsp; ✧ &nbsp; ✦</div>
 </header>
 
 <nav class="tabs" id="tabs">
-  <button type="button" class="tab-btn active" data-tab="profile"><span class="ico">🪪</span>Profile</button>
+  <button type="button" class="tab-btn active" data-tab="start"><span class="ico">👋</span>Start Here</button>
+  <button type="button" class="tab-btn" data-tab="profile"><span class="ico">🪪</span>Profile</button>
   <button type="button" class="tab-btn" data-tab="projects"><span class="ico">💼</span>Projects</button>
   <button type="button" class="tab-btn" data-tab="connectors"><span class="ico">🔌</span>Connectors</button>
   <button type="button" class="tab-btn" data-tab="skills"><span class="ico">✨</span>Skills</button>
@@ -672,8 +764,94 @@
   <button type="button" class="tab-btn" data-tab="checklist"><span class="ico">✅</span>Checklist</button>
 </nav>
 
+<!-- START HERE -->
+<section class="panel active" id="panel-start">
+  <div class="card" style="--accent-color: var(--pink);">
+    <div class="card-eyebrow">👋 New here? Read this first.</div>
+    <h2>What this <em>actually is</em></h2>
+    <p class="lead" style="font-size: 17px;">Claude is an AI assistant — like ChatGPT but better at writing, planning, and not making things up. This is a step-by-step guide to setting Claude up properly so it actually works for your business, not just answers questions in a chat window.</p>
+
+    <div class="start-here">
+      <span class="badge">Honest note</span>
+      Setting Claude up takes maybe an hour total. Spread it over a week if you want. Each tab is one step. You can do them in order or skip around — your progress saves automatically.
+    </div>
+
+    <div class="sparkle-divider">✦ ✧ ✦</div>
+
+    <h3 style="font-family: 'Fraunces', serif; font-size: 24px; color: var(--purple-deep); margin: 24px 0 14px;">The 6 steps, in plain English:</h3>
+
+    <div class="step-grid">
+      <div class="step-tile" style="--accent-color: var(--gold);">
+        <div class="step-num">01</div>
+        <div class="step-meta">
+          <strong>🪪 Profile</strong>
+          <span>Tell Claude who you are once, so it stops treating you like a stranger.</span>
+        </div>
+      </div>
+      <div class="step-tile" style="--accent-color: var(--purple);">
+        <div class="step-num">02</div>
+        <div class="step-meta">
+          <strong>💼 Projects</strong>
+          <span>Like folders for different jobs. One for content, one for clients, one for admin.</span>
+        </div>
+      </div>
+      <div class="step-tile" style="--accent-color: var(--teal);">
+        <div class="step-num">03</div>
+        <div class="step-meta">
+          <strong>🔌 Connectors</strong>
+          <span>Plug Claude into your apps (Calendar, Gmail, Drive). This is where it gets useful.</span>
+        </div>
+      </div>
+      <div class="step-tile" style="--accent-color: var(--pink);">
+        <div class="step-num">04</div>
+        <div class="step-meta">
+          <strong>✨ Skills</strong>
+          <span>Pre-trained shortcuts for things you do over and over.</span>
+        </div>
+      </div>
+      <div class="step-tile" style="--accent-color: #b56cf2;">
+        <div class="step-num">05</div>
+        <div class="step-meta">
+          <strong>⚡ Prompts</strong>
+          <span>Ready-to-paste questions. Copy, paste, run. Six to start with.</span>
+        </div>
+      </div>
+      <div class="step-tile" style="--accent-color: var(--sage);">
+        <div class="step-num">06</div>
+        <div class="step-meta">
+          <strong>✅ Checklist</strong>
+          <span>Tick things off so you can see what's done and what's next. Saves automatically.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sparkle-divider">✦ ✧ ✦</div>
+
+    <div class="info-block">
+      <h3>🤖 Coming from ChatGPT?</h3>
+      <p>Good news — you can bring most of your setup over. Here's how:</p>
+      <ol class="how-list">
+        <li><strong>Grab your Custom Instructions:</strong> in ChatGPT, go to <em>Settings → Personalization → Customize ChatGPT</em>. Copy what's in both boxes.</li>
+        <li><strong>Grab your saved memories (if you use them):</strong> Settings → Personalization → Memory → <em>Manage memories</em>. Copy anything worth keeping.</li>
+        <li><strong>Optional — full export:</strong> Settings → Data Controls → <em>Export data</em>. ChatGPT emails you a download with every conversation. Useful if you want to find old prompts.</li>
+        <li><strong>Paste the bits that matter into the Profile tab here.</strong> Don't paste it all in — translate and trim. Claude rewards specifics, not stuffing.</li>
+      </ol>
+      <p class="aside"><strong>One thing different:</strong> ChatGPT calls them "GPTs". Claude calls them "Projects" + "Skills". Same idea, different names. Don't worry about it.</p>
+    </div>
+
+    <div class="info-block warm">
+      <h3>🫶 Never used any AI tool before?</h3>
+      <p>Also fine. Skip the ChatGPT bit above. Just go to the Profile tab and start there. If a word doesn't make sense, hover or just keep going — context fills in. You're not behind. Most people doing this for the first time already.</p>
+    </div>
+
+    <div style="text-align: center; margin-top: 32px;">
+      <button type="button" class="btn pink" onclick="document.querySelector('.tab-btn[data-tab=\'profile\']').click();">Start with Step 01 → Profile</button>
+    </div>
+  </div>
+</section>
+
 <!-- PROFILE -->
-<section class="panel active" id="panel-profile">
+<section class="panel" id="panel-profile">
   <div class="card" style="--accent-color: var(--gold);">
     <div class="card-eyebrow">Step 01 · The Foundation</div>
     <h2>Tell Claude <em>who you are</em></h2>
@@ -687,19 +865,19 @@
     <div class="grid-2">
       <div>
         <label>Your name</label>
-        <input type="text" id="p-name" placeholder="Gemma" />
+        <input type="text" id="p-name" placeholder="e.g. Sarah" />
       </div>
       <div>
         <label>Business or role</label>
-        <input type="text" id="p-role" placeholder="Founder of Calm Back with Gem" />
+        <input type="text" id="p-role" placeholder="e.g. Founder of [Your Business]" />
       </div>
       <div>
         <label>Industry / niche</label>
-        <input type="text" id="p-industry" placeholder="Business strategy for neurodivergent founders" />
+        <input type="text" id="p-industry" placeholder="e.g. Strategy for wellness founders" />
       </div>
       <div>
         <label>Where you're based</label>
-        <input type="text" id="p-loc" placeholder="UK · GMT" />
+        <input type="text" id="p-loc" placeholder="e.g. London, UK · GMT" />
       </div>
     </div>
 
