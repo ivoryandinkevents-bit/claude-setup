@@ -3,24 +3,32 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>My Claude Setup — Personal Command Center</title>
+<title>My Claude Setup — Calm Back with Gem</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg: #f4f5f3;
-    --surface: #ffffff;
-    --ink: #1a2620;
-    --ink-soft: #4a5a52;
-    --muted: #7d8a83;
-    --line: #e2e6e2;
-    --green: #2d4a3e;
-    --green-deep: #1f352c;
-    --green-soft: #e8efea;
-    --accent: #c9a961;
-    --success: #5a8a6f;
-    --shadow: 0 1px 2px rgba(15, 30, 22, .04), 0 8px 24px rgba(15, 30, 22, .06);
+    --bg: #efe9e4;            /* brand cream */
+    --surface: #fbf7f3;       /* warm card surface */
+    --ink: #2f2a27;           /* dark chocolate */
+    --ink-soft: #5a4f48;
+    --muted: #8a7e74;
+    --line: #e2d8cd;
+    --sage: #8faf9a;
+    --sage-deep: #6e9381;
+    --sage-soft: #e6ede7;
+    --chocolate: #2f2a27;
+    --gold: #c9a24d;
+    --terracotta: #c46a4a;
+    --plum: #5a3e5b;
+    /* legacy aliases used throughout the file */
+    --green: var(--sage);
+    --green-deep: var(--chocolate);
+    --green-soft: var(--sage-soft);
+    --accent: var(--gold);
+    --success: var(--sage-deep);
+    --shadow: 0 1px 2px rgba(47, 42, 39, .04), 0 8px 24px rgba(47, 42, 39, .07);
     --radius: 12px;
   }
   * { box-sizing: border-box; }
@@ -35,6 +43,15 @@
   .wrap { max-width: 1100px; margin: 0 auto; padding: 32px 24px 80px; }
   header.hero {
     margin-bottom: 28px;
+  }
+  .logo {
+    display: block;
+    height: 64px;
+    width: auto;
+    margin-bottom: 18px;
+  }
+  @media (max-width: 640px) {
+    .logo { height: 52px; }
   }
   .badge {
     display: inline-block;
@@ -128,15 +145,15 @@
     font-size: 15px;
   }
   .start-here {
-    background: var(--green-soft);
-    border-left: 3px solid var(--green);
+    background: #f7e8df;                          /* terracotta tint — warm callout */
+    border-left: 3px solid var(--terracotta);
     padding: 12px 16px;
     border-radius: 8px;
     margin: 16px 0 24px;
     font-size: 14px;
-    color: var(--green-deep);
+    color: var(--ink);
   }
-  .start-here strong { color: var(--green-deep); }
+  .start-here strong { color: var(--terracotta); }
 
   label {
     display: block;
@@ -314,18 +331,35 @@
   footer.foot {
     text-align: center;
     margin-top: 40px;
-    padding-top: 20px;
+    padding-top: 24px;
     border-top: 1px solid var(--line);
     color: var(--muted);
     font-size: 12px;
   }
-  .signature { font-family: 'Fraunces', serif; font-style: italic; }
+  .signature { font-family: 'Fraunces', serif; font-style: italic; color: var(--ink-soft); font-size: 13px; }
+  .foot-cta {
+    margin-top: 18px;
+    padding: 14px 18px;
+    background: var(--sage-soft);
+    border-radius: 10px;
+    color: var(--ink);
+    font-size: 13px;
+    display: inline-block;
+  }
+  .foot-cta a {
+    color: var(--terracotta);
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 6px;
+  }
+  .foot-cta a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <header class="hero">
+  <img src="logo.png" alt="Calm Back with Gem" class="logo" />
   <span class="badge">◆ Personal Command Center</span>
   <h1>My Claude Setup</h1>
   <p class="subtitle">A working command center for setting up Claude exactly the way I work — profile, projects, skills, connectors, prompts. Edit anything. Copy what you need. Tick things off as you go.</p>
@@ -562,8 +596,12 @@ Rules:
 </section>
 
 <footer class="foot">
-  <div class="signature">— Made for Gemma · Calm Back with Gem</div>
-  <div style="margin-top: 4px;">All your inputs save automatically to this browser.</div>
+  <div class="signature">Calm Back with Gem · calm, grounded, strategic</div>
+  <div style="margin-top: 6px;">Your inputs save automatically to this browser. Nothing leaves your device.</div>
+  <div class="foot-cta">
+    Want help setting Claude up properly for your business?
+    <a href="https://calendar.notion.so/meet/gemmahurlstone/call" target="_blank" rel="noopener">Book a free Discovery Call →</a>
+  </div>
 </footer>
 
 </div>
