@@ -682,6 +682,51 @@
     font-size: 13px;
     margin-top: 12px;
   }
+  .info-block.plain {
+    background: #fcfaff;
+    border: 1px solid var(--line);
+  }
+  .info-block ul.how-list,
+  .info-block ol.how-list {
+    margin: 8px 0 12px;
+    padding-left: 22px;
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  .info-block ol.how-list > li {
+    margin-bottom: 22px;
+    padding-left: 4px;
+  }
+  .info-block ul.how-list > li {
+    margin-bottom: 10px;
+  }
+  .info-block .how-sub,
+  .info-block .how-where,
+  .info-block .how-do {
+    display: block;
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    margin-top: 6px;
+    padding-left: 0;
+  }
+  .info-block .how-where {
+    background: rgba(107, 63, 160, 0.06);
+    border-left: 3px solid var(--purple);
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-top: 8px;
+    font-size: 13px;
+  }
+  .info-block .how-do {
+    background: rgba(255, 109, 181, 0.07);
+    border-left: 3px solid var(--pink);
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-top: 6px;
+    font-size: 13px;
+  }
   .how-list {
     margin: 10px 0 14px;
     padding-left: 22px;
@@ -829,14 +874,42 @@
 
     <div class="info-block">
       <h3>🤖 Coming from ChatGPT?</h3>
-      <p>Good news — you can bring most of your setup over. Here's how:</p>
+      <p>You can bring your existing setup across. You don't need to start from scratch. Here's exactly where to click and what to copy:</p>
+
       <ol class="how-list">
-        <li><strong>Grab your Custom Instructions:</strong> in ChatGPT, go to <em>Settings → Personalization → Customize ChatGPT</em>. Copy what's in both boxes.</li>
-        <li><strong>Grab your saved memories (if you use them):</strong> Settings → Personalization → Memory → <em>Manage memories</em>. Copy anything worth keeping.</li>
-        <li><strong>Optional — full export:</strong> Settings → Data Controls → <em>Export data</em>. ChatGPT emails you a download with every conversation. Useful if you want to find old prompts.</li>
-        <li><strong>Paste the bits that matter into the Profile tab here.</strong> Don't paste it all in — translate and trim. Claude rewards specifics, not stuffing.</li>
+        <li>
+          <strong>Step 1 — Copy your Custom Instructions</strong><br>
+          <span class="how-sub">"Custom Instructions" is what ChatGPT calls the box where you tell it about yourself. It's the same idea as Claude's Profile.</span>
+          <span class="how-where"><strong>Where to find it:</strong> Open ChatGPT → click your name/profile picture (bottom-left or top-right depending on device) → <em>Settings</em> → <em>Personalization</em> → <em>Customize ChatGPT</em>.</span>
+          <span class="how-do"><strong>What to do:</strong> You'll see two boxes — "What would you like ChatGPT to know about you?" and "How would you like ChatGPT to respond?". Highlight the text in each, copy it (Cmd+C / Ctrl+C), paste it into a notes app for a sec. You'll use it in the Profile tab here.</span>
+        </li>
+
+        <li>
+          <strong>Step 2 — Copy your saved memories (only if you use them)</strong><br>
+          <span class="how-sub">"Memory" is the bit where ChatGPT remembers things you've told it across conversations. If you've never enabled it, skip this step.</span>
+          <span class="how-where"><strong>Where to find it:</strong> Settings → <em>Personalization</em> → <em>Memory</em> → click <em>Manage memories</em>.</span>
+          <span class="how-do"><strong>What to do:</strong> You'll see a list of things ChatGPT has saved about you. Copy the ones still true. Skip outdated ones. These go into the "What Claude should always know about you" field on the Profile tab.</span>
+        </li>
+
+        <li>
+          <strong>Step 3 — (Optional) Export everything</strong><br>
+          <span class="how-sub">"Export" means ChatGPT emails you a downloadable file with every chat you've ever had. Useful if you want to find old prompts that worked, or you just want a backup before switching tools.</span>
+          <span class="how-where"><strong>Where to find it:</strong> Settings → <em>Data controls</em> → <em>Export data</em>.</span>
+          <span class="how-do"><strong>What you get:</strong> An email arrives within a few minutes with a download link. Inside is a folder of files (mostly HTML and JSON — which you can open in a browser to read). Hunt for "conversations.html" — that's the one with all your chats.</span>
+        </li>
+
+        <li>
+          <strong>Step 4 — Paste what matters into the Profile tab here</strong><br>
+          <span class="how-sub">Don't paste it all in. Translate and trim. Claude rewards specifics, not stuffing.</span>
+        </li>
       </ol>
-      <p class="aside"><strong>One thing different:</strong> ChatGPT calls them "GPTs". Claude calls them "Projects" + "Skills". Same idea, different names. Don't worry about it.</p>
+
+      <p class="aside"><strong>Translation cheat sheet (ChatGPT → Claude):</strong><br>
+        ChatGPT "Custom Instructions" = Claude "Profile"<br>
+        ChatGPT "GPTs" = Claude "Projects" + "Skills"<br>
+        ChatGPT "Memory" = Claude "Profile" (the always-know-this field)<br>
+        Same ideas, different names. Don't worry about it.
+      </p>
     </div>
 
     <div class="info-block warm">
@@ -859,7 +932,11 @@
 
     <div class="start-here">
       <span class="badge">Start here</span>
-      Fill these in honestly, then hit <strong>Generate</strong>. Paste the result into <strong>Settings → Profile</strong> in Claude. Takes 10 minutes. Worth more than any course you'll buy this year.
+      Fill these fields in honestly, then hit <strong>Generate</strong>. A formatted block of text will appear at the bottom — that's your Profile. Copy it, then paste it into Claude (instructions below). Takes 10 minutes total.
+    </div>
+
+    <div class="info-block plain">
+      <p><strong>Where to paste it in Claude:</strong> Open Claude (claude.ai), click your initials/avatar in the bottom-left corner → <em>Settings</em> → <em>Profile</em>. There's a big text box labelled "What personal preferences should Claude consider?" Paste the whole generated block in there. Save. Done.</p>
     </div>
 
     <div class="grid-2">
@@ -911,7 +988,17 @@
   <div class="card" style="--accent-color: var(--purple);">
     <div class="card-eyebrow">Step 02 · Containers for Your Brain</div>
     <h2>Build <em>three projects</em></h2>
-    <p class="lead">Projects = separate rooms in Claude's brain. Different context, different rules, no leaking between them. Pick a starter, edit, paste into a new project in Claude. Done.</p>
+    <p class="lead">Projects = separate rooms in Claude's brain. Different context, different rules, no leaking between them. Below are 3 starter projects pre-written for you. Edit, copy, paste into Claude.</p>
+
+    <div class="info-block plain">
+      <p><strong>Quick definitions before you start:</strong></p>
+      <ul class="how-list">
+        <li><strong>Project:</strong> a workspace inside Claude. You make a new one for each big "area" of your work (writing, client work, admin). Conversations inside a project remember each other; conversations in different projects don't bleed across.</li>
+        <li><strong>System prompt:</strong> the rules you set for the project. It's just a block of text. Claude reads it before every conversation in that project, so you don't have to repeat yourself. You'll see one below for each project — copy it as-is or edit it.</li>
+        <li><strong>Knowledge base:</strong> files you upload to a project so Claude can read them (voice samples, brand guidelines, contracts, etc.). Optional but powerful.</li>
+      </ul>
+      <p><strong>How to actually create one:</strong> In Claude, click <em>Projects</em> in the left sidebar → <em>New Project</em> → name it → in the "Project Instructions" box, paste the system prompt from below → save. Drag any knowledge base files in.</p>
+    </div>
 
     <div class="start-here">
       <span class="badge">Start here</span>
@@ -999,7 +1086,17 @@ Rules:
   <div class="card" style="--accent-color: var(--pink);">
     <div class="card-eyebrow">Step 04 · Your Personal Shortcuts</div>
     <h2>Build your <em>skills library</em></h2>
-    <p class="lead">Skills = pre-trained instructions Claude triggers automatically when you mention a topic. Like having a shortcut for the things you do over and over. The leverage is wild.</p>
+    <p class="lead">Skills = saved sets of instructions Claude follows automatically when a topic comes up. Like a shortcut for the things you do over and over.</p>
+
+    <div class="info-block plain">
+      <p><strong>Quick definitions before you start:</strong></p>
+      <ul class="how-list">
+        <li><strong>Skill:</strong> a named instruction set. Once built, Claude uses it automatically whenever the topic comes up — you don't have to remind it.</li>
+        <li><strong>Trigger description:</strong> the short sentence that tells Claude WHEN to use this skill. E.g. "use when I'm drafting any email to a client". If your message matches the trigger, the skill kicks in.</li>
+        <li><strong>Skill instructions:</strong> the actual steps Claude follows when the skill is triggered. This is where you write the rules.</li>
+      </ul>
+      <p><strong>How to actually create one:</strong> In Claude, click <em>Skills</em> in the left sidebar → <em>New Skill</em> → paste the trigger description in the "When to use" field → paste the skill instructions in the main body → save. Skills work across all your projects.</p>
+    </div>
 
     <div class="start-here">
       <span class="badge">Start here</span>
