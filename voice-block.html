@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Brand Voice Block — Calm Back with Gem</title>
+<meta name="description" content="A 10-minute fill-in-the-blank that gives Claude your voice. Free." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lexend:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --lavender: #f3eaff;
+    --lilac: #e7d4ff;
+    --purple: #6b3fa0;
+    --purple-deep: #3d1d6b;
+    --plum: #5a3e5b;
+    --pink: #ff6db5;
+    --pink-soft: #ffd9ec;
+    --gold: #d4a84a;
+    --gold-soft: #fdf2cc;
+    --teal: #5dc7c0;
+    --teal-soft: #d4f1ee;
+    --sage: #a8c8b3;
+    --cream: #fdfaff;
+    --bg: #faf6ff;
+    --surface: #ffffff;
+    --ink: #2a1a3e;
+    --ink-soft: #5a4a73;
+    --muted: #8a7ba0;
+    --line: #e8dff5;
+    --shadow: 0 2px 6px rgba(61, 29, 107, .06), 0 12px 32px rgba(61, 29, 107, .08);
+    --shadow-pop: 0 4px 12px rgba(107, 63, 160, .15), 0 16px 40px rgba(107, 63, 160, .15);
+    --radius: 16px;
+    --radius-lg: 22px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Lexend', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    background-image:
+      radial-gradient(circle at 10% 0%, var(--lilac) 0%, transparent 40%),
+      radial-gradient(circle at 90% 10%, var(--pink-soft) 0%, transparent 35%),
+      radial-gradient(circle at 50% 100%, var(--teal-soft) 0%, transparent 45%);
+    background-attachment: fixed;
+    color: var(--ink);
+    line-height: 1.65;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: 0.01em;
+  }
+
+  .wrap { max-width: 800px; margin: 0 auto; padding: 28px 20px 80px; }
+
+  /* HEADER */
+  header.hero { text-align: center; padding: 24px 12px 16px; }
+  .logo {
+    display: block;
+    margin: 0 auto 18px;
+    height: 96px;
+    width: auto;
+    max-width: 80%;
+    mix-blend-mode: multiply;
+    filter: drop-shadow(0 8px 24px rgba(107, 63, 160, .2));
+  }
+  @media (max-width: 640px) { .logo { height: 72px; } }
+
+  .eyebrow {
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(38px, 6vw, 60px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--purple-deep);
+    margin: 8px 0 14px;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--pink);
+    font-weight: 600;
+  }
+  .lede {
+    font-size: 18px;
+    color: var(--ink-soft);
+    max-width: 600px;
+    margin: 0 auto 8px;
+    line-height: 1.6;
+  }
+
+  /* BEFORE / AFTER */
+  .ba-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 36px 0 28px;
+  }
+  @media (max-width: 640px) { .ba-grid { grid-template-columns: 1fr; } }
+  .ba-card {
+    border-radius: 14px;
+    padding: 22px 24px;
+    border: 2px solid;
+  }
+  .ba-card .ba-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .ba-card p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  .ba-before { background: #fff3ee; border-color: #f0a98a; }
+  .ba-before .ba-label { color: #c46a4a; }
+  .ba-after { background: #e6f5ec; border-color: #8ec3a0; }
+  .ba-after .ba-label { color: #3e6650; }
+
+  /* CARDS */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    box-shadow: var(--shadow);
+    margin-bottom: 22px;
+  }
+  .card h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(26px, 4vw, 32px);
+    line-height: 1.15;
+    margin: 0 0 12px;
+    color: var(--purple-deep);
+    letter-spacing: -0.01em;
+  }
+  .card h2 em { font-style: italic; color: var(--pink); }
+  .card p.lead {
+    color: var(--ink-soft);
+    font-size: 16px;
+    margin: 0 0 16px;
+  }
+
+  .step-num {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 6px;
+  }
+
+  /* FORM */
+  label {
+    display: block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--purple);
+    margin: 22px 0 8px;
+  }
+  .label-help {
+    display: block;
+    font-family: 'Lexend', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0.01em;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  input[type="text"], textarea {
+    width: 100%;
+    background: #fcfaff;
+    border: 2px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-family: 'Lexend', sans-serif;
+    font-size: 15px;
+    color: var(--ink);
+    transition: all .15s ease;
+    line-height: 1.55;
+  }
+  input[type="text"]:focus, textarea:focus {
+    outline: none;
+    border-color: var(--purple);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(107, 63, 160, .12);
+  }
+  textarea { min-height: 70px; resize: vertical; }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--purple), var(--purple-deep));
+    color: #fff;
+    border: none;
+    padding: 16px 28px;
+    border-radius: 12px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .2s ease;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    box-shadow: 0 4px 14px rgba(107, 63, 160, .25);
+    width: 100%;
+    text-decoration: none;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(107, 63, 160, .35); }
+  .btn.pink { background: linear-gradient(135deg, var(--pink), #d94a8f); box-shadow: 0 4px 14px rgba(255, 109, 181, .3); }
+  .btn.gold { background: linear-gradient(135deg, var(--gold), #b88a2c); box-shadow: 0 4px 14px rgba(212, 168, 74, .3); }
+  .btn.ghost { background: transparent; color: var(--purple-deep); border: 2px solid var(--purple); box-shadow: none; }
+  .btn.ghost:hover { background: var(--lavender); }
+  .btn.big { padding: 20px 32px; font-size: 15px; }
+
+  /* OUTPUT BOX */
+  .output-wrap { margin-top: 26px; }
+  .output-box {
+    background: linear-gradient(135deg, var(--lavender), #fff);
+    border: 2px solid var(--purple);
+    border-radius: 14px;
+    padding: 22px 24px;
+    font-family: 'Lexend', sans-serif;
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--ink);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    min-height: 200px;
+    transition: all .25s ease;
+  }
+  .output-box.empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-style: italic;
+    text-align: center;
+    background: #fcfaff;
+    border-color: var(--line);
+    border-style: dashed;
+  }
+
+  /* SCREENSHOT PLACEHOLDERS */
+  .screenshot-step {
+    margin: 24px 0;
+    padding: 20px;
+    background: #fcfaff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    border-left: 5px solid var(--purple);
+  }
+  .screenshot-step h4 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--purple-deep);
+    margin: 0 0 8px;
+  }
+  .screenshot-step p { margin: 0 0 12px; font-size: 15px; color: var(--ink); }
+  .screenshot-placeholder {
+    background: repeating-linear-gradient(45deg, #ebe0ff, #ebe0ff 10px, #f3eaff 10px, #f3eaff 20px);
+    border: 2px dashed var(--purple);
+    border-radius: 10px;
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--purple-deep);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.5;
+  }
+  .screenshot-placeholder small {
+    display: block;
+    margin-top: 4px;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    text-transform: none;
+  }
+
+  /* TEST PROMPT */
+  .test-prompt {
+    background: linear-gradient(135deg, var(--gold-soft), #fff);
+    border: 2px solid var(--gold);
+    border-radius: 14px;
+    padding: 20px 22px;
+    margin: 16px 0;
+    font-family: 'Lexend', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+  .test-prompt strong { color: #8a6d2c; }
+
+  /* CTA SECTION */
+  .cta-section {
+    background: linear-gradient(135deg, var(--purple-deep), var(--purple));
+    color: #fff;
+    border-radius: 22px;
+    padding: 32px;
+    margin-top: 32px;
+    box-shadow: var(--shadow-pop);
+  }
+  .cta-section h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0 0 8px;
+  }
+  .cta-section h2 em { font-style: italic; color: var(--pink-soft); }
+  .cta-section p { font-size: 15px; opacity: 0.9; margin: 0 0 20px; }
+  .cta-grid {
+    display: grid;
+    gap: 12px;
+    margin-top: 18px;
+  }
+  .cta-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: #fff;
+    text-decoration: none;
+    transition: all .2s ease;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .cta-link:hover { background: rgba(255, 255, 255, 0.18); transform: translateX(3px); }
+  .cta-link .arrow { font-size: 20px; }
+  .cta-link small { display: block; font-size: 12px; font-weight: 400; opacity: 0.7; margin-top: 2px; text-transform: none; letter-spacing: 0.02em; }
+
+  /* EMAIL CAPTURE */
+  .email-capture {
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 14px;
+    padding: 20px;
+    margin-top: 18px;
+  }
+  .email-capture .email-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--pink-soft);
+    margin-bottom: 8px;
+  }
+  .email-capture p { color: rgba(255,255,255,0.85); font-size: 14px; margin: 0 0 12px; }
+  .email-form {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .email-form input[type="email"] {
+    flex: 1;
+    min-width: 180px;
+    padding: 12px 14px;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Lexend', sans-serif;
+    font-size: 14px;
+    background: #fff;
+    color: var(--ink);
+  }
+  .email-form input[type="email"]:focus { outline: 2px solid var(--pink); }
+  .email-form button {
+    padding: 12px 22px;
+    background: var(--pink);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all .2s ease;
+  }
+  .email-form button:hover { background: #d94a8f; transform: translateY(-1px); }
+  .email-thanks {
+    display: none;
+    color: var(--pink-soft);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 16px;
+    text-align: center;
+    padding: 12px;
+  }
+  .email-thanks.show { display: block; }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: linear-gradient(135deg, var(--purple-deep), var(--purple));
+    color: #fff;
+    padding: 14px 24px;
+    border-radius: 999px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    opacity: 0;
+    transition: all .3s ease;
+    pointer-events: none;
+    z-index: 100;
+    box-shadow: var(--shadow-pop);
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* SPARKLES */
+  .sparkle-divider {
+    text-align: center;
+    margin: 32px 0 8px;
+    color: var(--pink);
+    font-size: 18px;
+    letter-spacing: 14px;
+  }
+
+  /* FOOTER */
+  footer.foot {
+    text-align: center;
+    margin-top: 48px;
+    padding-top: 28px;
+    border-top: 2px dashed var(--lilac);
+    color: var(--ink-soft);
+    font-size: 13px;
+  }
+  .signature {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--purple-deep);
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+
+  /* MICRO HELPERS */
+  .center { text-align: center; }
+  .small { font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <img src="logo.png" alt="Calm Back with Gem" class="logo" />
+  <div class="eyebrow">Free · 10 minutes · No ChatGPT-sounding nonsense</div>
+  <h1>The Brand <em>Voice Block</em></h1>
+  <p class="lede">A 10-minute fill-in-the-blank that gives Claude your voice. Paste it once. Claude sounds like you in every conversation, forever.</p>
+  <div class="sparkle-divider">✦ ✧ ✦</div>
+</header>
+
+<!-- BEFORE / AFTER -->
+<section class="ba-grid">
+  <div class="ba-card ba-before">
+    <div class="ba-label">Before</div>
+    <p>You open Claude. It knows nothing about you. You explain your business, your voice, your audience — from scratch. Every. Single. Time. Every output sounds vaguely like a LinkedIn corporate ad.</p>
+  </div>
+  <div class="ba-card ba-after">
+    <div class="ba-label">After</div>
+    <p>Claude knows your voice — your rhythm, your phrases, what you say and what you'd never say — before you type a single word. Drafts come out sounding like you, not like an AI wrote them.</p>
+  </div>
+</section>
+
+<!-- THE TOOL -->
+<section class="card">
+  <div class="step-num">Step 01 of 03 · Fill it in</div>
+  <h2>Tell me <em>about you</em></h2>
+  <p class="lead">Five fields. Already filled in with an example so you're not staring at empty boxes. Edit each one to be about you.</p>
+
+  <label>Your first name
+    <span class="label-help">Just your first name is fine.</span>
+  </label>
+  <input type="text" id="f-name" value="Sarah" />
+
+  <label>What your business is — in one sentence
+    <span class="label-help">Imagine you're telling someone at a barbecue. Plain English.</span>
+  </label>
+  <textarea id="f-business">I'm a wedding planner in Bristol — I help couples plan small, low-stress weddings that don't feel like everyone else's.</textarea>
+
+  <label>Who you serve
+    <span class="label-help">The actual humans who pay you. Be specific.</span>
+  </label>
+  <textarea id="f-audience">Couples in their 30s and 40s, mostly creatives, who don't want a Pinterest-perfect wedding. They want it warm, intimate, and a bit unconventional.</textarea>
+
+  <label>3 phrases that sound like YOU
+    <span class="label-help">Words you say all the time. Quirks. Slang. The bits that make you, you.</span>
+  </label>
+  <textarea id="f-phrases">"Honestly, no" — I push back when something's not right.
+"Right, here's the thing" — when I'm about to give the real answer.
+"It's giving (vibe)" — playful, casual.</textarea>
+
+  <label>5 phrases you'd NEVER say
+    <span class="label-help">The corporate-speak that makes you cringe. Claude won't use these.</span>
+  </label>
+  <textarea id="f-banned">"Unlock", "leverage", "elevate", "in today's fast-paced world", "game-changer"</textarea>
+
+  <button type="button" class="btn big" id="btn-generate">✦ Generate my voice block</button>
+</section>
+
+<!-- OUTPUT -->
+<section class="card" id="output-card">
+  <div class="step-num">Step 02 of 03 · Copy it</div>
+  <h2>Your <em>voice block</em></h2>
+  <p class="lead">This is what gives Claude your voice. Click "Copy" — then paste it into Claude (instructions in Step 03 below).</p>
+
+  <div class="output-wrap">
+    <div class="output-box empty" id="output">Click "Generate my voice block" above and your formatted block will appear here ↑</div>
+  </div>
+
+  <div style="margin-top: 16px;">
+    <button type="button" class="btn pink big" id="btn-copy">📋 Copy to clipboard</button>
+  </div>
+</section>
+
+<!-- PASTE GUIDE -->
+<section class="card">
+  <div class="step-num">Step 03 of 03 · Paste it into Claude</div>
+  <h2>Where it goes <em>in Claude</em></h2>
+  <p class="lead">If you don't have a Claude account yet, go to <a href="https://claude.ai" target="_blank" rel="noopener" style="color: var(--purple); font-weight: 600;">claude.ai</a> and sign up — it's free. Then follow these three screens.</p>
+
+  <div class="screenshot-step">
+    <h4>① Open your settings</h4>
+    <p>In Claude, click on your initials (the circle in the bottom-left corner). A menu pops up. Click <strong>Settings</strong>.</p>
+    <div class="screenshot-placeholder">
+      Screenshot placeholder
+      <small>Replace `screenshots/01-settings.png` with your screenshot of Claude's bottom-left initials menu</small>
+    </div>
+  </div>
+
+  <div class="screenshot-step">
+    <h4>② Find the Profile section</h4>
+    <p>In the Settings menu, click <strong>Profile</strong>. You'll see a big text box labelled <em>"What personal preferences should Claude consider?"</em></p>
+    <div class="screenshot-placeholder">
+      Screenshot placeholder
+      <small>Replace `screenshots/02-profile.png` with your screenshot of Claude's Profile settings page</small>
+    </div>
+  </div>
+
+  <div class="screenshot-step">
+    <h4>③ Paste it in and save</h4>
+    <p>Paste your voice block (Cmd+V on Mac, Ctrl+V on Windows). Click <strong>Save</strong>. Done.</p>
+    <div class="screenshot-placeholder">
+      Screenshot placeholder
+      <small>Replace `screenshots/03-save.png` with your screenshot of the Save button</small>
+    </div>
+  </div>
+</section>
+
+<!-- TEST IT -->
+<section class="card">
+  <div class="step-num">Did it work?</div>
+  <h2>Test it <em>right now</em></h2>
+  <p class="lead">Open a new conversation in Claude (the main chat window) and paste this prompt:</p>
+
+  <div class="test-prompt">
+    <strong>Test prompt:</strong> Write me a one-sentence Instagram bio.
+  </div>
+
+  <button type="button" class="btn ghost" id="btn-copy-test">📋 Copy test prompt</button>
+
+  <p class="lead" style="margin-top: 22px;">If it sounds like you — like words you'd actually say, with your phrases, no banned words — <strong>it's working</strong>. ✨</p>
+  <p class="lead">If it doesn't, you might need to add more detail to one of the fields above and regenerate. Don't worry — the fields stay filled in.</p>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>You did the <em>tiny version</em>. Want the full setup?</h2>
+  <p>The Voice Block is one piece of a proper Claude setup. The full version covers Projects, Skills, Connectors and more — so Claude becomes a real assistant, not a chat window.</p>
+
+  <div class="cta-grid">
+    <a class="cta-link" href="/" target="_blank" rel="noopener">
+      <span>
+        Free DIY Setup Guide
+        <small>The full walkthrough — same depth, do it yourself</small>
+      </span>
+      <span class="arrow">→</span>
+    </a>
+    <a class="cta-link" href="https://calendar.notion.so/meet/gemmahurlstone/call" target="_blank" rel="noopener">
+      <span>
+        Want me to set it up for you?
+        <small>Free 30-min Discovery Call — no pitch, just clarity</small>
+      </span>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+
+  <div class="email-capture">
+    <div class="email-label">✉️ Get more like this in your inbox</div>
+    <p>One email a week. Real Claude tips. No spam, no fluff. Unsubscribe whenever you want.</p>
+    <form class="email-form" id="email-form" onsubmit="return handleEmail(event)">
+      <input type="email" id="email-input" placeholder="your@email.com" required aria-label="Email address" />
+      <button type="submit">Sign me up</button>
+    </form>
+    <div class="email-thanks" id="email-thanks">✨ You're in. Check your inbox.</div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="signature">Calm Back with Gem · bold, grounded, unapologetic</div>
+  <div>Made with care. Your inputs save automatically — only on your device.</div>
+</footer>
+
+</div>
+
+<div class="toast" id="toast">Copied ✨</div>
+
+<script>
+const STORAGE_KEY = 'voice_block_v1';
+const fieldIds = ['f-name', 'f-business', 'f-audience', 'f-phrases', 'f-banned'];
+
+// Restore saved values
+let state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+fieldIds.forEach(id => {
+  const el = document.getElementById(id);
+  if (state[id]) el.value = state[id];
+  el.addEventListener('input', () => {
+    state[id] = el.value;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  });
+});
+
+// Toast
+const toast = document.getElementById('toast');
+function showToast(msg) {
+  toast.textContent = msg || 'Copied ✨';
+  toast.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => toast.classList.remove('show'), 1800);
+}
+
+// Generate
+function val(id) { return document.getElementById(id).value.trim(); }
+
+document.getElementById('btn-generate').addEventListener('click', () => {
+  const name = val('f-name') || '[your name]';
+  const business = val('f-business') || '[your business]';
+  const audience = val('f-audience') || '[your audience]';
+  const phrases = val('f-phrases') || '[your phrases]';
+  const banned = val('f-banned') || '[banned phrases]';
+
+  const block = `My name is ${name}.
+
+What I do: ${business}
+
+Who I work with: ${audience}
+
+How I sound (my voice):
+- I write like I talk — direct, warm, real.
+- Phrases that sound like me:
+${phrases.split('\n').map(p => p.trim()).filter(Boolean).map(p => '  ' + (p.startsWith('-') ? p : '- ' + p)).join('\n')}
+
+Words and phrases I would NEVER say (please don't use these):
+${banned.split(/[,\n]/).map(p => p.trim()).filter(Boolean).map(p => '- ' + p.replace(/^["'-]+|["']+$/g, '')).join('\n')}
+
+How I want you to respond:
+- Match my voice from above.
+- Plain language, no jargon.
+- Short sentences mixed with longer ones — never three long in a row.
+- Hook in line one. No throat-clearing intros like "in today's fast-paced world".
+- Push back if my idea's weak. Don't apologise three times before answering.
+- Don't end with summary closers like "in conclusion".
+
+Sparring tools — when I ask you to apply these by number:
+1. Ask me clarifying questions until you're 95% confident you can complete the task.
+2. What would a top 0.1% person in this industry think?
+3. Reframe this in a way that challenges how I'm seeing the problem.
+4. Before final output, check for gaps, risks, or missed opportunities.
+5. What would future ${name} do in this situation?`;
+
+  const out = document.getElementById('output');
+  out.textContent = block;
+  out.classList.remove('empty');
+  state.output = block;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+
+  // Scroll to output
+  document.getElementById('output-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  showToast('Voice block generated ✨');
+});
+
+// Restore output if exists
+if (state.output) {
+  const out = document.getElementById('output');
+  out.textContent = state.output;
+  out.classList.remove('empty');
+}
+
+// Copy generated block
+document.getElementById('btn-copy').addEventListener('click', () => {
+  const text = document.getElementById('output').textContent;
+  if (!text || text.includes('Click "Generate')) {
+    showToast('Generate it first ↑');
+    return;
+  }
+  navigator.clipboard.writeText(text).then(() => showToast('Copied to clipboard ✨'));
+});
+
+// Copy test prompt
+document.getElementById('btn-copy-test').addEventListener('click', () => {
+  navigator.clipboard.writeText('Write me a one-sentence Instagram bio.').then(() => showToast('Test prompt copied ✨'));
+});
+
+// Email capture (placeholder — wire to MailerLite)
+function handleEmail(e) {
+  e.preventDefault();
+  const email = document.getElementById('email-input').value.trim();
+  if (!email) return false;
+  // TODO: replace with MailerLite form embed code or API call
+  // For now: store locally and show thank-you
+  state.email = email;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  document.getElementById('email-form').style.display = 'none';
+  document.getElementById('email-thanks').classList.add('show');
+  return false;
+}
+</script>
+</body>
+</html>
