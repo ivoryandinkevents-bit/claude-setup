@@ -476,6 +476,136 @@
   /* MICRO HELPERS */
   .center { text-align: center; }
   .small { font-size: 13px; color: var(--muted); }
+
+  /* PROGRESS BAR */
+  .form-progress {
+    background: var(--lavender);
+    border-radius: 999px;
+    height: 10px;
+    margin: 0 0 8px;
+    overflow: hidden;
+  }
+  .form-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--pink), var(--purple));
+    width: 0%;
+    transition: width .35s ease;
+    border-radius: 999px;
+  }
+  .form-progress-meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 18px;
+  }
+
+  /* INVALID FIELD HIGHLIGHT */
+  input.is-invalid, textarea.is-invalid {
+    border-color: var(--pink) !important;
+    background: #fff4fa !important;
+    box-shadow: 0 0 0 4px rgba(255, 109, 181, .15) !important;
+  }
+  .validation-warning {
+    display: none;
+    background: #fff4fa;
+    border: 2px solid var(--pink);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin: 14px 0 0;
+    color: var(--purple-deep);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .validation-warning.show { display: block; }
+  .validation-warning strong { color: var(--pink); }
+
+  /* HELP POPOVER */
+  .label-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin: 22px 0 8px;
+  }
+  .label-row label { margin: 0; flex: 1; }
+  .help-btn {
+    background: var(--lavender);
+    border: 1px solid var(--lilac);
+    color: var(--purple);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all .15s ease;
+    padding: 0;
+    line-height: 1;
+  }
+  .help-btn:hover {
+    background: var(--purple);
+    color: #fff;
+    transform: scale(1.05);
+  }
+  .help-popover {
+    display: none;
+    background: linear-gradient(135deg, var(--gold-soft), #fff);
+    border: 2px solid var(--gold);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin: 8px 0 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  .help-popover.show { display: block; animation: fadeIn .25s ease; }
+  .help-popover ul { margin: 8px 0 0; padding-left: 20px; }
+  .help-popover li { margin-bottom: 6px; }
+  .help-popover strong { color: #8a6d2c; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* STUCK HELP — floating */
+  .stuck-help {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: linear-gradient(135deg, var(--pink), #d94a8f);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 14px 22px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(255, 109, 181, .35);
+    text-decoration: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all .4s ease;
+    pointer-events: none;
+    z-index: 90;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .stuck-help.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .stuck-help:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(255, 109, 181, .45); }
+  @media (max-width: 640px) {
+    .stuck-help { bottom: 16px; right: 16px; padding: 12px 18px; font-size: 12px; }
+  }
 </style>
 </head>
 <body>
@@ -507,34 +637,71 @@
   <h2>Tell me <em>about you</em></h2>
   <p class="lead">Five fields. Already filled in with an example so you're not staring at empty boxes. Edit each one to be about you.</p>
 
-  <label>Your first name
+  <div class="form-progress-meta">
+    <span id="progress-label">Just getting started</span>
+    <span><span id="progress-count">0</span> of 5 done</span>
+  </div>
+  <div class="form-progress"><div class="form-progress-fill" id="progress-fill"></div></div>
+
+  <label for="f-name">Your first name
     <span class="label-help">Just your first name is fine.</span>
   </label>
   <input type="text" id="f-name" value="Sarah" />
 
-  <label>What your business is — in one sentence
+  <label for="f-business">What your business is — in one sentence
     <span class="label-help">Imagine you're telling someone at a barbecue. Plain English.</span>
   </label>
   <textarea id="f-business">I'm a wedding planner in Bristol — I help couples plan small, low-stress weddings that don't feel like everyone else's.</textarea>
 
-  <label>Who you serve
+  <label for="f-audience">Who you serve
     <span class="label-help">The actual humans who pay you. Be specific.</span>
   </label>
   <textarea id="f-audience">Couples in their 30s and 40s, mostly creatives, who don't want a Pinterest-perfect wedding. They want it warm, intimate, and a bit unconventional.</textarea>
 
-  <label>3 phrases that sound like YOU
-    <span class="label-help">Words you say all the time. Quirks. Slang. The bits that make you, you.</span>
-  </label>
+  <div class="label-row">
+    <label for="f-phrases">3 phrases that sound like YOU
+      <span class="label-help">Words you say all the time. Quirks. Slang. The bits that make you, you.</span>
+    </label>
+    <button type="button" class="help-btn" data-help="help-phrases" aria-label="Help with this field">?</button>
+  </div>
+  <div class="help-popover" id="help-phrases">
+    <strong>Stuck? Try these prompts:</strong>
+    <ul>
+      <li>What do your friends say sounds like you when they read your messages?</li>
+      <li>What's a phrase you've used in 3 emails this week?</li>
+      <li>How do you start a sentence when you're being honest with someone?</li>
+      <li>Any catchphrase, slang, or filler word that's so YOU?</li>
+      <li>Look at your last Instagram caption — pick the bit that sounds least like a robot.</li>
+    </ul>
+  </div>
   <textarea id="f-phrases">"Honestly, no" — I push back when something's not right.
 "Right, here's the thing" — when I'm about to give the real answer.
 "It's giving (vibe)" — playful, casual.</textarea>
 
-  <label>5 phrases you'd NEVER say
-    <span class="label-help">The corporate-speak that makes you cringe. Claude won't use these.</span>
-  </label>
+  <div class="label-row">
+    <label for="f-banned">5 phrases you'd NEVER say
+      <span class="label-help">The corporate-speak that makes you cringe. Claude won't use these.</span>
+    </label>
+    <button type="button" class="help-btn" data-help="help-banned" aria-label="Help with this field">?</button>
+  </div>
+  <div class="help-popover" id="help-banned">
+    <strong>Easy starter list — keep what fits, swap what doesn't:</strong>
+    <ul>
+      <li>"Unlock", "leverage", "elevate"</li>
+      <li>"In today's fast-paced world"</li>
+      <li>"Game-changer", "deep dive", "circle back"</li>
+      <li>"Synergy", "harness", "value-add"</li>
+      <li>"Journey" (when not literal travel)</li>
+      <li>Any phrase you'd never hear yourself actually say out loud</li>
+    </ul>
+  </div>
   <textarea id="f-banned">"Unlock", "leverage", "elevate", "in today's fast-paced world", "game-changer"</textarea>
 
-  <button type="button" class="btn big" id="btn-generate">✦ Generate my voice block</button>
+  <div class="validation-warning" id="validation-warning">
+    <strong>Almost there!</strong> A couple of fields are empty (highlighted in pink above). Fill those in, then hit Generate again.
+  </div>
+
+  <button type="button" class="btn big" id="btn-generate" style="margin-top: 18px;">✦ Generate my voice block</button>
 </section>
 
 <!-- OUTPUT -->
@@ -644,6 +811,10 @@
 
 <div class="toast" id="toast">Copied ✨</div>
 
+<a class="stuck-help" id="stuck-help" href="https://calendar.notion.so/meet/gemmahurlstone/call" target="_blank" rel="noopener">
+  💜 Stuck? Book a free 15-min chat
+</a>
+
 <script>
 const STORAGE_KEY = 'voice_block_v1';
 const fieldIds = ['f-name', 'f-business', 'f-audience', 'f-phrases', 'f-banned'];
@@ -656,8 +827,42 @@ fieldIds.forEach(id => {
   el.addEventListener('input', () => {
     state[id] = el.value;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    el.classList.remove('is-invalid');
+    updateProgress();
   });
 });
+
+// Progress
+const progressLabels = {
+  0: 'Just getting started',
+  1: 'Off the mark',
+  2: 'Hitting your stride',
+  3: 'Over halfway',
+  4: 'Almost there',
+  5: 'Ready to generate ✨'
+};
+function updateProgress() {
+  const filled = fieldIds.filter(id => document.getElementById(id).value.trim().length > 0).length;
+  const pct = (filled / fieldIds.length) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-count').textContent = filled;
+  document.getElementById('progress-label').textContent = progressLabels[filled];
+}
+updateProgress();
+
+// Help popovers
+document.querySelectorAll('.help-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = document.getElementById(btn.dataset.help);
+    if (target) target.classList.toggle('show');
+  });
+});
+
+// Stuck-help — appears after 90 seconds on page
+setTimeout(() => {
+  const sh = document.getElementById('stuck-help');
+  if (sh) sh.classList.add('show');
+}, 90000);
 
 // Toast
 const toast = document.getElementById('toast');
@@ -672,11 +877,33 @@ function showToast(msg) {
 function val(id) { return document.getElementById(id).value.trim(); }
 
 document.getElementById('btn-generate').addEventListener('click', () => {
-  const name = val('f-name') || '[your name]';
-  const business = val('f-business') || '[your business]';
-  const audience = val('f-audience') || '[your audience]';
-  const phrases = val('f-phrases') || '[your phrases]';
-  const banned = val('f-banned') || '[banned phrases]';
+  // Validate — every field required
+  let allValid = true;
+  fieldIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el.value.trim()) {
+      el.classList.add('is-invalid');
+      allValid = false;
+    } else {
+      el.classList.remove('is-invalid');
+    }
+  });
+  const warning = document.getElementById('validation-warning');
+  if (!allValid) {
+    warning.classList.add('show');
+    // scroll to the first empty field
+    const firstEmpty = fieldIds.map(id => document.getElementById(id)).find(el => !el.value.trim());
+    if (firstEmpty) firstEmpty.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    showToast('Fill the highlighted fields first');
+    return;
+  }
+  warning.classList.remove('show');
+
+  const name = val('f-name');
+  const business = val('f-business');
+  const audience = val('f-audience');
+  const phrases = val('f-phrases');
+  const banned = val('f-banned');
 
   const block = `My name is ${name}.
 
